@@ -8,7 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; background: #18181b; color: #d4d4d8; padding: 32px; min-height: 100vh; }
+  html, body { height: 100%; }
+  body { font-family: 'Inter', sans-serif; background: #18181b; color: #d4d4d8; padding: 32px; min-height: 100vh; display: flex; flex-direction: column; }
 
   /* Header */
   .header { text-align: center; margin-bottom: 24px; }
@@ -28,7 +29,7 @@
   /* Main container */
   .container {
     border: 1px solid #3f3f46; background: #27272a; border-radius: 0 12px 12px 12px;
-    min-height: 520px; display: flex; gap: 0;
+    flex: 1; display: flex; gap: 0; min-height: 0;
   }
 
   /* Left panel — code/data display */
@@ -51,8 +52,8 @@
   .data-block .data-item:last-child { margin-bottom: 0; }
   .data-block .data-name { color: #a1a1aa; }
   .data-block .data-price { color: #52525b; }
-  .data-block .data-opt { padding-left: 14px; color: #52525b; }
-  .data-block .data-opt .data-vals { color: #71717a; }
+  .data-block .data-opt { padding-left: 14px; color: #a1a1aa; }
+  .data-block .data-opt .data-vals { color: #d4d4d8; }
 
   /* Chat area */
   .chat-area { flex: 1; display: flex; flex-direction: column; background: #27272a; }
@@ -92,6 +93,7 @@
   .right-panel {
     width: 260px; border-left: 1px solid #3f3f46; padding: 16px;
     flex-shrink: 0; background: #27272a; overflow-y: auto;
+    display: flex; flex-direction: column;
   }
 
   /* Order output */
@@ -216,7 +218,7 @@
   <div class="right-panel">
     <div class="panel-title">Formatted Order</div>
     <div class="order-box">
-      <div class="order-title">Order #1042</div>
+      <div class="order-title">#1042</div>
       <div class="order-line"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
       <div class="order-opts">
         <div><span class="opt-key">sugar:</span> <span class="opt-val">50%</span></div>
@@ -231,7 +233,7 @@
       </div>
       <div class="order-total"><span>TOTAL</span><span>$11.00</span></div>
     </div>
-    <div class="order-status">Create Order</div>
+    <div class="order-status">Submit</div>
   </div>
 </div>
 
@@ -241,22 +243,22 @@
   <div class="left-panel">
     <div class="panel-title">Existing Order</div>
     <div class="data-block">
-      <div style="color:#a1a1aa; margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid #3f3f46;">SO-2024-0587</div>
+      <div style="color:#a1a1aa; margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid #3f3f46;">#0587</div>
       <div class="data-item">
         <span class="data-vals">1x</span> <span class="data-name">Brown Sugar Boba</span>
-        <div class="data-opt"><span style="color:#52525b;">sugar:</span> <span class="data-vals">50%</span></div>
-        <div class="data-opt"><span style="color:#52525b;">ice:</span> <span class="data-vals">none</span></div>
-        <div class="data-opt"><span style="color:#52525b;">topping:</span> <span class="data-vals">pearl</span></div>
+        <div class="data-opt"><span>sugar:</span> <span class="data-vals">50%</span></div>
+        <div class="data-opt"><span>ice:</span> <span class="data-vals">none</span></div>
+        <div class="data-opt"><span>topping:</span> <span class="data-vals">pearl</span></div>
       </div>
       <div class="data-item">
         <span class="data-vals">1x</span> <span class="data-name">Nasi Lemak</span>
-        <div class="data-opt"><span style="color:#52525b;">spice:</span> <span class="data-vals">extra</span></div>
-        <div class="data-opt"><span style="color:#52525b;">add-on:</span> <span class="data-vals">egg</span></div>
+        <div class="data-opt"><span>spice:</span> <span class="data-vals">extra</span></div>
+        <div class="data-opt"><span>add-on:</span> <span class="data-vals">egg</span></div>
       </div>
       <div class="data-item">
         <span class="data-vals">2x</span> <span class="data-name">Teh C</span>
-        <div class="data-opt"><span style="color:#52525b;">sugar:</span> <span class="data-vals">siu dai</span></div>
-        <div class="data-opt"><span style="color:#52525b;">temp:</span> <span class="data-vals">cold</span></div>
+        <div class="data-opt"><span>sugar:</span> <span class="data-vals">siu dai</span></div>
+        <div class="data-opt"><span>temp:</span> <span class="data-vals">cold</span></div>
       </div>
     </div>
   </div>
@@ -267,7 +269,7 @@
     <div class="messages">
       <div class="msg bot">
         <div class="label">Bot</div>
-        Hi! I can see your order SO-2024-0587. What would you like to change?
+        Hi! I can see your order #0587. What would you like to change?
       </div>
       <div class="msg user">
         <div class="label">You</div>
@@ -289,9 +291,32 @@
 
   <!-- Right: Before & After -->
   <div class="right-panel">
+    <div class="panel-title">After</div>
+    <div class="order-box">
+      <div class="order-title">#0587 (edited)</div>
+      <div class="order-line"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
+      <div class="order-opts">
+        <div><span class="opt-key">sugar:</span> <span class="opt-val">25%</span> <span style="color:#52525b; font-size:8px;">&#x270f;&#xfe0f;</span></div>
+        <div><span class="opt-key">ice:</span> <span class="opt-val">none</span></div>
+        <div><span class="opt-key">topping:</span> <span class="opt-val">pearl ($0.50)</span></div>
+      </div>
+      <div style="height:6px;"></div>
+      <div class="order-line" style="text-decoration: line-through; color: #3f3f46;"><span>1x Nasi Lemak</span><span>$5.50</span></div>
+      <div style="height:6px;"></div>
+      <div class="order-line"><span>2x Teh C</span><span>$7.60</span></div>
+      <div class="order-opts">
+        <div><span class="opt-key">sugar:</span> <span class="opt-val">siu dai</span></div>
+        <div><span class="opt-key">temp:</span> <span class="opt-val">cold</span></div>
+      </div>
+      <div class="order-total"><span>TOTAL</span><span>$12.60</span></div>
+    </div>
+    <div class="order-status">Submit</div>
+
+    <div class="flow-arrow">&#x2191;</div>
+
     <div class="panel-title">Before</div>
-    <div class="order-box" style="opacity: 0.5;">
-      <div class="order-title">SO-2024-0587</div>
+    <div class="order-box" style="opacity: 0.7;">
+      <div class="order-title">#0587</div>
       <div class="order-line"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
       <div class="order-opts">
         <div><span class="opt-key">sugar:</span> <span class="opt-val">50%</span></div>
@@ -312,29 +337,6 @@
       </div>
       <div class="order-total"><span>TOTAL</span><span>$18.60</span></div>
     </div>
-
-    <div class="flow-arrow">&#x2193;</div>
-
-    <div class="panel-title">After</div>
-    <div class="order-box">
-      <div class="order-title">SO-2024-0587 (edited)</div>
-      <div class="order-line"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
-      <div class="order-opts">
-        <div><span class="opt-key">sugar:</span> <span class="opt-val">25%</span> <span style="color:#52525b; font-size:8px;">&#x270f;&#xfe0f;</span></div>
-        <div><span class="opt-key">ice:</span> <span class="opt-val">none</span></div>
-        <div><span class="opt-key">topping:</span> <span class="opt-val">pearl ($0.50)</span></div>
-      </div>
-      <div style="height:6px;"></div>
-      <div class="order-line" style="text-decoration: line-through; color: #3f3f46;"><span>1x Nasi Lemak</span><span>$5.50</span></div>
-      <div style="height:6px;"></div>
-      <div class="order-line"><span>2x Teh C</span><span>$7.60</span></div>
-      <div class="order-opts">
-        <div><span class="opt-key">sugar:</span> <span class="opt-val">siu dai</span></div>
-        <div><span class="opt-key">temp:</span> <span class="opt-val">cold</span></div>
-      </div>
-      <div class="order-total"><span>TOTAL</span><span>$12.60</span></div>
-    </div>
-    <div class="order-status">Edit Order</div>
   </div>
 </div>
 
@@ -422,7 +424,7 @@ document.querySelectorAll('.order-status').forEach(btn => {
     const label = btn.textContent;
     btn.classList.add('clicked');
     btn.textContent = 'Sent!';
-    showToast(label === 'Create Order' ? 'Order created successfully' : 'Order updated successfully');
+    showToast('Order submitted successfully');
     setTimeout(() => {
       btn.classList.remove('clicked');
       btn.textContent = label;
