@@ -88,6 +88,7 @@
     border-radius: 8px; cursor: pointer; transition: background 0.15s;
   }
   .chat-input button:hover { background: #e4e4e7; }
+  .chat-input button:disabled { opacity: 0.4; cursor: not-allowed; }
 
   /* Right panel */
   .right-panel {
@@ -99,15 +100,15 @@
   /* Order output */
   .order-box {
     border-radius: 8px; padding: 12px;
-    font-size: 11px; line-height: 1.7; background: #3f3f46; color: #d4d4d8;
+    font-size: 11px; line-height: 1.4; background: #3f3f46; color: #d4d4d8;
   }
-  .order-box .order-title { font-weight: 700; font-size: 12px; color: #fafafa; margin-bottom: 8px; border-bottom: 1px solid #52525b; padding-bottom: 6px; }
+  .order-box .order-title { font-weight: 700; font-size: 12px; color: #fafafa; margin-bottom: 6px; border-bottom: 1px solid #52525b; padding-bottom: 6px; }
   .order-line { display: flex; justify-content: space-between; }
   .order-line .detail { color: #a1a1aa; font-size: 10px; padding-left: 12px; }
   .order-opts { padding-left: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; line-height: 1.8; }
   .order-opts .opt-key { color: #a1a1aa; }
   .order-opts .opt-val { color: #d4d4d8; }
-  .order-total { border-top: 1px solid #52525b; margin-top: 8px; padding-top: 6px; font-weight: 700; display: flex; justify-content: space-between; color: #fafafa; }
+  .order-total { border-top: 1px solid #52525b; margin-top: 6px; padding-top: 6px; font-weight: 700; display: flex; justify-content: space-between; color: #fafafa; }
   .order-status {
     margin-top: 12px; padding: 8px; background: #d4d4d8; color: #18181b;
     border-radius: 8px; font-size: 12px; text-align: center; font-weight: 600;
@@ -194,18 +195,7 @@
   <div class="chat-area">
     <div class="chat-header">Chat</div>
     <div class="messages">
-      <div class="msg bot">
-        <div class="label">Bot</div>
-        Hi! What would you like to order today? You can see our menu on the left.
-      </div>
-      <div class="msg user">
-        <div class="label">You</div>
-        1 brown sugar boba 50% sweet no ice add pearl, and 1 nasi lemak extra spicy with egg
-      </div>
-      <div class="msg bot">
-        <div class="label">Bot</div>
-        Here's your order! See the formatted order on the right. &#x2192;
-      </div>
+      <div class="msg bot">Hi! What would you like to order today? You can see our menu on the left.</div>
     </div>
     <div class="chat-input">
       <input type="text" placeholder="Type your order in natural language...">
@@ -217,48 +207,38 @@
   <!-- Right: Formatted Order -->
   <div class="right-panel">
     <div class="panel-title">Formatted Order</div>
-    <div class="order-box">
-      <div class="order-title">#1042</div>
-      <div class="order-line"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
-      <div class="order-opts">
-        <div><span class="opt-key">sugar:</span> <span class="opt-val">50%</span></div>
-        <div><span class="opt-key">ice:</span> <span class="opt-val">none</span></div>
-        <div><span class="opt-key">topping:</span> <span class="opt-val">pearl ($0.50)</span></div>
-      </div>
-      <div style="height:6px;"></div>
-      <div class="order-line"><span>1x Nasi Lemak</span><span>$5.50</span></div>
-      <div class="order-opts">
-        <div><span class="opt-key">spice:</span> <span class="opt-val">extra</span></div>
-        <div><span class="opt-key">add-on:</span> <span class="opt-val">egg ($0.50)</span></div>
-      </div>
-      <div class="order-total"><span>TOTAL</span><span>$11.00</span></div>
+    <div id="place-order-box" class="order-box" style="color:#52525b; text-align:center; padding:24px 12px;">
+      Your order will appear here
     </div>
-    <div class="order-status">Submit</div>
   </div>
 </div>
 
 <!-- TAB 2: Edit Order -->
 <div class="container hidden" id="tab-edit">
-  <!-- Left: Existing SO (data display) -->
+  <!-- Left: Menu (data display) -->
   <div class="left-panel">
-    <div class="panel-title">Existing Order</div>
+    <div class="panel-title">Menu Items</div>
     <div class="data-block">
-      <div style="color:#a1a1aa; margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid #3f3f46;">#0587</div>
       <div class="data-item">
-        <span class="data-vals">1x</span> <span class="data-name">Brown Sugar Boba</span>
-        <div class="data-opt"><span>sugar:</span> <span class="data-vals">50%</span></div>
-        <div class="data-opt"><span>ice:</span> <span class="data-vals">none</span></div>
-        <div class="data-opt"><span>topping:</span> <span class="data-vals">pearl</span></div>
+        <span class="data-name">Brown Sugar Boba</span> <span class="data-price">$4.50</span>
+        <div class="data-opt">sugar: <span class="data-vals">0% | 25% | 50% | 75% | 100%</span></div>
+        <div class="data-opt">ice: <span class="data-vals">none | less | normal</span></div>
+        <div class="data-opt">toppings +$0.50: <span class="data-vals">pearl | jelly | pudding</span></div>
       </div>
       <div class="data-item">
-        <span class="data-vals">1x</span> <span class="data-name">Nasi Lemak</span>
-        <div class="data-opt"><span>spice:</span> <span class="data-vals">extra</span></div>
-        <div class="data-opt"><span>add-on:</span> <span class="data-vals">egg</span></div>
+        <span class="data-name">Teh C</span> <span class="data-price">$3.80</span>
+        <div class="data-opt">sugar: <span class="data-vals">kosong | siu dai | normal</span></div>
+        <div class="data-opt">temp: <span class="data-vals">hot | cold</span></div>
       </div>
       <div class="data-item">
-        <span class="data-vals">2x</span> <span class="data-name">Teh C</span>
-        <div class="data-opt"><span>sugar:</span> <span class="data-vals">siu dai</span></div>
-        <div class="data-opt"><span>temp:</span> <span class="data-vals">cold</span></div>
+        <span class="data-name">Nasi Lemak</span> <span class="data-price">$5.50</span>
+        <div class="data-opt">spice: <span class="data-vals">mild | normal | extra</span></div>
+        <div class="data-opt">add-on +$0.50: <span class="data-vals">egg | otah | chicken</span></div>
+      </div>
+      <div class="data-item">
+        <span class="data-name">Kopi Gao</span> <span class="data-price">$4.00</span>
+        <div class="data-opt">sugar: <span class="data-vals">kosong | normal | gah dai</span></div>
+        <div class="data-opt">temp: <span class="data-vals">hot | cold</span></div>
       </div>
     </div>
   </div>
@@ -267,21 +247,7 @@
   <div class="chat-area">
     <div class="chat-header">Chat</div>
     <div class="messages">
-      <div class="msg bot">
-        <div class="label">Bot</div>
-        Hi! I can see your order #0587. What would you like to change?
-      </div>
-      <div class="msg user">
-        <div class="label">You</div>
-        change the boba to 25% sugar and remove the nasi lemak
-      </div>
-      <div class="msg bot">
-        <div class="label">Bot</div>
-        Done! Here's what changed:<br><br>
-        &#x270f;&#xfe0f; Brown Sugar Boba &#x2192; 25% sugar (was 50%)<br>
-        &#x274c; Nasi Lemak removed<br><br>
-        See updated order on the right. &#x2192;
-      </div>
+      <div class="msg bot">Hi! I can see your order #0587. What would you like to change?</div>
     </div>
     <div class="chat-input">
       <input type="text" placeholder="Tell me what to change...">
@@ -291,45 +257,22 @@
 
   <!-- Right: Before & After -->
   <div class="right-panel">
-    <div class="panel-title">After</div>
-    <div class="order-box">
-      <div class="order-title">#0587 (edited)</div>
-      <div class="order-line"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
-      <div class="order-opts">
-        <div><span class="opt-key">sugar:</span> <span class="opt-val">25%</span> <span style="color:#52525b; font-size:8px;">&#x270f;&#xfe0f;</span></div>
-        <div><span class="opt-key">ice:</span> <span class="opt-val">none</span></div>
-        <div><span class="opt-key">topping:</span> <span class="opt-val">pearl ($0.50)</span></div>
-      </div>
-      <div style="height:6px;"></div>
-      <div class="order-line" style="text-decoration: line-through; color: #3f3f46;"><span>1x Nasi Lemak</span><span>$5.50</span></div>
-      <div style="height:6px;"></div>
-      <div class="order-line"><span>2x Teh C</span><span>$7.60</span></div>
-      <div class="order-opts">
-        <div><span class="opt-key">sugar:</span> <span class="opt-val">siu dai</span></div>
-        <div><span class="opt-key">temp:</span> <span class="opt-val">cold</span></div>
-      </div>
-      <div class="order-total"><span>TOTAL</span><span>$12.60</span></div>
-    </div>
-    <div class="order-status">Submit</div>
-
-    <div class="flow-arrow">&#x2191;</div>
-
-    <div class="panel-title">Before</div>
-    <div class="order-box" style="opacity: 0.7;">
+    <div class="panel-title">Current Order</div>
+    <div id="edit-order-box" class="order-box">
       <div class="order-title">#0587</div>
-      <div class="order-line"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
+      <div class="order-line"><span>1x Brown Sugar Boba</span><span>$5.00</span></div>
       <div class="order-opts">
         <div><span class="opt-key">sugar:</span> <span class="opt-val">50%</span></div>
         <div><span class="opt-key">ice:</span> <span class="opt-val">none</span></div>
-        <div><span class="opt-key">topping:</span> <span class="opt-val">pearl ($0.50)</span></div>
+        <div><span class="opt-key">topping:</span> <span class="opt-val">pearl (+$0.50)</span></div>
       </div>
-      <div style="height:6px;"></div>
-      <div class="order-line"><span>1x Nasi Lemak</span><span>$5.50</span></div>
+      <div style="height:4px;"></div>
+      <div class="order-line"><span>1x Nasi Lemak</span><span>$6.00</span></div>
       <div class="order-opts">
         <div><span class="opt-key">spice:</span> <span class="opt-val">extra</span></div>
-        <div><span class="opt-key">add-on:</span> <span class="opt-val">egg ($0.50)</span></div>
+        <div><span class="opt-key">add-on:</span> <span class="opt-val">egg (+$0.50)</span></div>
       </div>
-      <div style="height:6px;"></div>
+      <div style="height:4px;"></div>
       <div class="order-line"><span>2x Teh C</span><span>$7.60</span></div>
       <div class="order-opts">
         <div><span class="opt-key">sugar:</span> <span class="opt-val">siu dai</span></div>
@@ -343,6 +286,105 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// ── OpenAI config ──
+const OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY'; // Replace with your key
+
+const SYSTEM_PROMPT = `You are a friendly WhatsApp food ordering bot for a hawker stall.
+
+MENU:
+1. Brown Sugar Boba — $4.50
+   - sugar: 0%, 25%, 50%, 75%, 100%
+   - ice: none, less, normal
+   - toppings (+$0.50 each): pearl, jelly, pudding
+
+2. Teh C — $3.80
+   - sugar: kosong, siu dai, normal
+   - temp: hot, cold
+
+3. Nasi Lemak — $5.50
+   - spice: mild, normal, extra
+   - add-on (+$0.50 each): egg, otah, chicken
+
+4. Kopi Gao — $4.00
+   - sugar: kosong, normal, gah dai
+   - temp: hot, cold
+
+RULES:
+- Understand Singlish and casual language.
+- If the user's order is unclear or missing options, ask for clarification.
+- After confirming an order, summarise it clearly with item names, options chosen, and total price.
+- Be concise and friendly. Use short replies.
+- If the user asks for something not on the menu, politely say it's not available.
+- For the Edit Order flow, you are modifying an existing order. Confirm what changed.
+- ACCUMULATE ORDERS: In Place Order mode, the order builds up across messages. Always include ALL current items in the "order" JSON. When the user adds items, include previous items plus new ones. When the user removes items, drop them from the list. When the user changes options, update that item.
+
+OUTPUT FORMAT:
+Always respond with a JSON object. Never respond with plain text.
+{
+  "message": "Your chat message to the customer",
+  "order": null or { "items": [...], "total": number }
+}
+
+When "order" is null: you are greeting, asking a clarification question, or no order is ready yet.
+When "order" is present, include all items with this structure:
+{
+  "name": "Item Name",
+  "qty": 1,
+  "price": 4.50,
+  "options": { "sugar": "50%", "ice": "none" },
+  "removed": false
+}
+Set "removed": true for items the customer asked to remove (edit mode).
+
+PRICING — be precise:
+- "price" for each item = base price + (number of add-ons/toppings × $0.50), multiplied by qty.
+  Example: 1x Nasi Lemak with egg and chicken = $5.50 + $0.50 + $0.50 = $6.50
+  Example: 1x Brown Sugar Boba with pearl = $4.50 + $0.50 = $5.00
+  Example: 2x Teh C (no add-ons) = $3.80 × 2 = $7.60
+- "total" = sum of all non-removed item prices.
+Always include "order" when the customer has placed or confirmed items.`;
+
+// Conversation history per tab
+const conversationHistory = {
+  place: [
+    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'assistant', content: "Hi! What would you like to order today? You can see our menu on the left." }
+  ],
+  edit: [
+    { role: 'system', content: SYSTEM_PROMPT + '\n\nYou are now in Edit Order mode. The customer has existing order #0587:\n- 1x Brown Sugar Boba (sugar: 50%, ice: none, topping: pearl)\n- 1x Nasi Lemak (spice: extra, add-on: egg)\n- 2x Teh C (sugar: siu dai, temp: cold)\nTotal: $18.60\n\nHelp them modify this order.' },
+    { role: 'assistant', content: "Hi! I can see your order #0587. What would you like to change?" }
+  ]
+};
+
+async function callChatGPT(tabKey, userMessage) {
+  conversationHistory[tabKey].push({ role: 'user', content: userMessage });
+
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${OPENAI_API_KEY}`
+    },
+    body: JSON.stringify({
+      model: 'gpt-4o-mini',
+      messages: conversationHistory[tabKey],
+      temperature: 0.7,
+      max_tokens: 500,
+      response_format: { type: 'json_object' }
+    })
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`OpenAI API error: ${res.status} — ${err}`);
+  }
+
+  const data = await res.json();
+  const reply = data.choices[0].message.content;
+  conversationHistory[tabKey].push({ role: 'assistant', content: reply });
+  return reply;
+}
+
 function showTab(tab) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-place').classList.add('hidden');
@@ -364,25 +406,23 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 1800);
 }
 
-// Fake bot replies
-const botReplies = [
-  "Got it! I've added that to your order.",
-  "Sure thing! Anything else you'd like?",
-  "Updated! Check the order on the right.",
-  "No problem. I've made that change.",
-  "Done! Your order has been updated.",
-];
-
-function sendMessage(container) {
+async function sendMessage(container) {
   const input = container.querySelector('.chat-input input');
   const messages = container.querySelector('.messages');
   const text = input.value.trim();
   if (!text) return;
 
+  // Determine which tab we're in
+  const tabKey = container.id === 'tab-place' ? 'place' : 'edit';
+
+  // Disable send while AI responds
+  const sendBtn = container.querySelector('.chat-input button');
+  sendBtn.disabled = true;
+
   // Add user message
   const userMsg = document.createElement('div');
   userMsg.className = 'msg user';
-  userMsg.innerHTML = '<div class="label">You</div>' + text;
+  userMsg.textContent = text;
   messages.appendChild(userMsg);
   input.value = '';
   messages.scrollTop = messages.scrollHeight;
@@ -394,16 +434,99 @@ function sendMessage(container) {
   messages.appendChild(typing);
   messages.scrollTop = messages.scrollHeight;
 
-  // Bot reply after delay
-  setTimeout(() => {
+  // Call ChatGPT
+  try {
+    const reply = await callChatGPT(tabKey, text);
     typing.remove();
+
+    let chatText = reply;
+    let order = null;
+    try {
+      const parsed = JSON.parse(reply);
+      chatText = parsed.message || reply;
+      order = parsed.order || null;
+    } catch (e) {
+      // If JSON parse fails, use raw reply as chat text
+    }
+
     const botMsg = document.createElement('div');
     botMsg.className = 'msg bot';
-    const reply = botReplies[Math.floor(Math.random() * botReplies.length)];
-    botMsg.innerHTML = '<div class="label">Bot</div>' + reply;
+    botMsg.innerHTML = chatText.replace(/\n/g, '<br>');
     messages.appendChild(botMsg);
-    messages.scrollTop = messages.scrollHeight;
-  }, 800 + Math.random() * 600);
+
+    if (order) {
+      const boxId = tabKey === 'place' ? 'place-order-box' : 'edit-order-box';
+      renderOrder(document.getElementById(boxId), order, tabKey);
+    }
+  } catch (err) {
+    typing.remove();
+    const errMsg = document.createElement('div');
+    errMsg.className = 'msg bot';
+    errMsg.textContent = 'Sorry, something went wrong. ' + err.message;
+    messages.appendChild(errMsg);
+  }
+  // Re-enable send
+  sendBtn.disabled = false;
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function renderOrder(box, order, tabKey) {
+  // If no items (or all removed in place mode), show placeholder
+  const hasItems = tabKey === 'place'
+    ? order.items.some(i => !i.removed)
+    : order.items.length > 0;
+
+  if (!hasItems) {
+    box.innerHTML = tabKey === 'place' ? 'Your order will appear here' : 'Your edited order will appear here';
+    box.style.cssText = 'color:#52525b; text-align:center; padding:24px 12px;';
+    const btn = box.parentElement.querySelector('.order-status');
+    if (btn) btn.remove();
+    return;
+  }
+
+  const orderNum = tabKey === 'edit' ? '#0587 (edited)' : '#' + String(Math.floor(1000 + Math.random() * 9000));
+  let html = `<div class="order-title">${orderNum}</div>`;
+
+  // In place mode, skip removed items entirely. In edit mode, show with strikethrough.
+  const visibleItems = tabKey === 'place' ? order.items.filter(i => !i.removed) : order.items;
+
+  visibleItems.forEach((item, idx) => {
+    const strikeStyle = item.removed ? ' style="text-decoration: line-through; color: #52525b;"' : '';
+    html += `<div class="order-line"${strikeStyle}><span>${item.qty}x ${item.name}</span><span>$${item.price.toFixed(2)}</span></div>`;
+
+    if (item.options && !item.removed) {
+      html += '<div class="order-opts">';
+      for (const [key, val] of Object.entries(item.options)) {
+        html += `<div><span class="opt-key">${key}:</span> <span class="opt-val">${val}</span></div>`;
+      }
+      html += '</div>';
+    }
+    if (idx < visibleItems.length - 1) html += '<div style="height:4px;"></div>';
+  });
+
+  // Compute total from items (don't trust GPT math)
+  const computedTotal = order.items
+    .filter(i => !i.removed)
+    .reduce((sum, i) => sum + i.price, 0);
+  html += `<div class="order-total"><span>TOTAL</span><span>$${computedTotal.toFixed(2)}</span></div>`;
+  box.innerHTML = html;
+  box.style = '';
+
+  // Add submit button after the order box if not already there
+  let submitBtn = box.parentElement.querySelector('.order-status');
+  if (!submitBtn) {
+    submitBtn = document.createElement('button');
+    submitBtn.className = 'order-status';
+    submitBtn.textContent = 'Submit';
+    box.parentElement.appendChild(submitBtn);
+    submitBtn.addEventListener('click', () => {
+      const label = submitBtn.textContent;
+      submitBtn.classList.add('clicked');
+      submitBtn.textContent = 'Sent!';
+      showToast('Order submitted successfully');
+      setTimeout(() => { submitBtn.classList.remove('clicked'); submitBtn.textContent = label; }, 2000);
+    });
+  }
 }
 
 // Send button clicks
