@@ -287,7 +287,7 @@
 
 <script>
 // ── OpenAI config ──
-const OPENAI_API_KEY = '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'; // Replace with your key
+const OPENAI_API_KEY = new URLSearchParams(window.location.hash.slice(1)).get('key') || '';
 
 const SYSTEM_PROMPT = `You are a friendly WhatsApp food ordering bot for a hawker stall.
 
