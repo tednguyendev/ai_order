@@ -11,501 +11,477 @@
   body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; padding: 40px 24px; }
   h1 { text-align: center; font-size: 28px; font-weight: 300; letter-spacing: -0.5px; margin-bottom: 6px; }
   .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 40px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 24px; max-width: 1600px; margin: 0 auto; }
+  .variants { display: flex; flex-direction: column; gap: 32px; max-width: 1100px; margin: 0 auto; }
   .variant-label { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 500; }
 
-  /* Shared chat structure */
-  .card { border-radius: 16px; overflow: hidden; }
-  .card-chat { display: flex; flex-direction: column; height: 420px; }
-  .card-header { padding: 16px 20px; font-weight: 600; font-size: 14px; display: flex; align-items: center; justify-content: space-between; }
-  .card-header .badge { font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 500; }
-  .card-messages { flex: 1; padding: 12px 16px; overflow: hidden; display: flex; flex-direction: column; gap: 8px; }
-  .card-msg { padding: 10px 14px; border-radius: 12px; font-size: 12px; line-height: 1.5; max-width: 85%; }
-  .card-msg.bot { align-self: flex-start; }
-  .card-msg.user { align-self: flex-end; }
-  .card-order { padding: 12px 16px; font-size: 11px; }
-  .card-order-item { display: flex; justify-content: space-between; padding: 3px 0; }
-  .card-order-item.detail { padding-left: 14px; opacity: 0.6; font-size: 10px; }
-  .card-order-total { display: flex; justify-content: space-between; font-weight: 700; padding-top: 6px; margin-top: 6px; }
-  .card-input { padding: 12px 16px; display: flex; gap: 8px; }
-  .card-input input { flex: 1; border: none; outline: none; font-size: 12px; padding: 10px 14px; border-radius: 10px; font-family: inherit; }
-  .card-input button { border: none; padding: 10px 18px; border-radius: 10px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; }
-  .card-btn { margin: 0 16px 12px; padding: 10px; border: none; border-radius: 10px; font-size: 12px; font-weight: 600; cursor: pointer; text-align: center; font-family: inherit; }
-  .menu-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
-  .menu-chip { font-size: 9px; padding: 2px 7px; border-radius: 8px; }
+  /* Full layout card */
+  .card { border-radius: 16px; overflow: hidden; display: flex; height: 400px; }
+  .card .left { width: 220px; padding: 14px; overflow-y: auto; flex-shrink: 0; }
+  .card .center { flex: 1; display: flex; flex-direction: column; }
+  .card .right { width: 220px; padding: 14px; overflow-y: auto; flex-shrink: 0; }
+
+  /* Header bar spanning full width */
+  .card-wrap { border-radius: 16px; overflow: hidden; }
+  .card-topbar { padding: 12px 20px; font-weight: 600; font-size: 13px; display: flex; align-items: center; justify-content: space-between; }
+  .card-topbar .badge { font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 500; }
+  .card-topbar .tabs { display: flex; gap: 4px; }
+  .card-topbar .tab { font-size: 10px; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-weight: 500; }
+
+  /* Panels */
+  .panel-title { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; opacity: 0.5; }
+  .menu-item { padding: 8px; margin-bottom: 6px; border-radius: 6px; font-size: 11px; }
+  .menu-item .name { font-weight: 600; display: flex; justify-content: space-between; }
+  .menu-item .chips { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+  .menu-item .chip { font-size: 8px; padding: 2px 6px; border-radius: 6px; }
+  .menu-item .opt-label { font-size: 8px; margin-top: 4px; opacity: 0.5; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* Chat */
+  .messages { flex: 1; padding: 10px 14px; overflow: hidden; display: flex; flex-direction: column; gap: 6px; }
+  .msg { padding: 8px 12px; border-radius: 10px; font-size: 11px; line-height: 1.5; max-width: 80%; }
+  .msg.bot { align-self: flex-start; }
+  .msg.user { align-self: flex-end; }
+  .chat-input { padding: 10px 14px; display: flex; gap: 6px; }
+  .chat-input input { flex: 1; border: none; outline: none; font-size: 11px; padding: 8px 12px; border-radius: 8px; font-family: inherit; }
+  .chat-input button { border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: inherit; }
+
+  /* Order */
+  .order-box { border-radius: 8px; padding: 10px; font-size: 10px; line-height: 1.6; }
+  .order-box .title { font-weight: 700; font-size: 11px; margin-bottom: 6px; padding-bottom: 4px; }
+  .order-line { display: flex; justify-content: space-between; }
+  .order-line.detail { padding-left: 10px; opacity: 0.5; font-size: 9px; }
+  .order-total { display: flex; justify-content: space-between; font-weight: 700; padding-top: 6px; margin-top: 6px; }
+  .order-btn { margin-top: 10px; padding: 8px; border: none; border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; text-align: center; width: 100%; font-family: inherit; }
 </style>
 </head>
 <body>
 
 <h1>AI Order &mdash; Style Exploration</h1>
-<p class="subtitle">20 variants &middot; modern &middot; professional</p>
+<p class="subtitle">20 full-layout variants &middot; menu + chat + order</p>
 
-<div class="grid">
+<div class="variants" id="variants"></div>
 
-<!-- 1. Minimal Dark -->
+<script>
+const STYLES = [
+  {
+    name: "Minimal Dark",
+    font: "Inter",
+    bg: "#111", border: "#222",
+    topbar: "#111", topbarText: "#fff", topbarBorder: "#222",
+    tabActive: "#fff", tabActiveText: "#000", tabInactive: "#222", tabInactiveText: "#666",
+    leftBg: "#111", leftBorder: "#1a1a1a",
+    menuBg: "#1a1a1a", menuText: "#ccc", chipBg: "#252525", chipText: "#888",
+    centerBg: "#111", centerBorder: "#1a1a1a",
+    botBg: "#1a1a1a", botText: "#aaa",
+    userBg: "#fff", userText: "#000",
+    inputBg: "#1a1a1a", inputText: "#fff", btnBg: "#fff", btnText: "#000",
+    rightBg: "#0d0d0d", rightBorder: "#1a1a1a",
+    orderBg: "#1a1a1a", orderText: "#ccc", orderBorder: "#333",
+    orderBtnBg: "#fff", orderBtnText: "#000",
+  },
+  {
+    name: "Soft White",
+    font: "Inter",
+    bg: "#fff", border: "#e8e8e8",
+    topbar: "#fff", topbarText: "#111", topbarBorder: "#eee",
+    tabActive: "#111", tabActiveText: "#fff", tabInactive: "#f5f5f5", tabInactiveText: "#999",
+    leftBg: "#fafafa", leftBorder: "#eee",
+    menuBg: "#f0f0f0", menuText: "#333", chipBg: "#e4e4e4", chipText: "#666",
+    centerBg: "#fff", centerBorder: "#eee",
+    botBg: "#f5f5f5", botText: "#333",
+    userBg: "#111", userText: "#fff",
+    inputBg: "#f5f5f5", inputText: "#111", btnBg: "#111", btnText: "#fff",
+    rightBg: "#fafafa", rightBorder: "#eee",
+    orderBg: "#f0f0f0", orderText: "#333", orderBorder: "#ddd",
+    orderBtnBg: "#111", orderBtnText: "#fff",
+  },
+  {
+    name: "Ocean Blue",
+    font: "Inter",
+    bg: "#0c1929", border: "#1a3050",
+    topbar: "#0c1929", topbarText: "#e0f0ff", topbarBorder: "#1a3050",
+    tabActive: "#0a6abf", tabActiveText: "#fff", tabInactive: "#112840", tabInactiveText: "#5a8aaa",
+    leftBg: "#0e1f33", leftBorder: "#1a3050",
+    menuBg: "#112840", menuText: "#8cb8d8", chipBg: "#1a3a5a", chipText: "#6aa8d0",
+    centerBg: "#0c1929", centerBorder: "#1a3050",
+    botBg: "#112840", botText: "#8cb8d8",
+    userBg: "#0a6abf", userText: "#fff",
+    inputBg: "#112840", inputText: "#e0f0ff", btnBg: "#0a6abf", btnText: "#fff",
+    rightBg: "#0e1f33", rightBorder: "#1a3050",
+    orderBg: "#112840", orderText: "#8cb8d8", orderBorder: "#1a3a5a",
+    orderBtnBg: "#0a6abf", orderBtnText: "#fff",
+  },
+  {
+    name: "Warm Sand",
+    font: "DM Sans",
+    bg: "#faf6f0", border: "#e8ddd0",
+    topbar: "#faf6f0", topbarText: "#3d2e1c", topbarBorder: "#e8ddd0",
+    tabActive: "#3d2e1c", tabActiveText: "#faf6f0", tabInactive: "#f0e8da", tabInactiveText: "#8a6d4a",
+    leftBg: "#f5efe5", leftBorder: "#e8ddd0",
+    menuBg: "#f0e8da", menuText: "#5a4530", chipBg: "#e8ddd0", chipText: "#7a5c3a",
+    centerBg: "#faf6f0", centerBorder: "#e8ddd0",
+    botBg: "#f0e8da", botText: "#5a4530",
+    userBg: "#3d2e1c", userText: "#faf6f0",
+    inputBg: "#f0e8da", inputText: "#3d2e1c", btnBg: "#3d2e1c", btnText: "#faf6f0",
+    rightBg: "#f5efe5", rightBorder: "#e8ddd0",
+    orderBg: "#f0e8da", orderText: "#5a4530", orderBorder: "#d4c4a8",
+    orderBtnBg: "#3d2e1c", orderBtnText: "#faf6f0",
+  },
+  {
+    name: "Neon Terminal",
+    font: "Space Grotesk",
+    bg: "#0a0f0a", border: "#1a3a1a",
+    topbar: "#0a0f0a", topbarText: "#4ade80", topbarBorder: "#1a3a1a",
+    tabActive: "#4ade80", tabActiveText: "#0a0f0a", tabInactive: "#0f1a0f", tabInactiveText: "#2a7a40",
+    leftBg: "#0c120c", leftBorder: "#1a3a1a",
+    menuBg: "#0f1a0f", menuText: "#4ade80", chipBg: "#1a3a1a", chipText: "#4ade80",
+    centerBg: "#0a0f0a", centerBorder: "#1a3a1a",
+    botBg: "#0f1a0f", botText: "#4ade80",
+    userBg: "#4ade80", userText: "#0a0f0a",
+    inputBg: "#0f1a0f", inputText: "#4ade80", btnBg: "#4ade80", btnText: "#0a0f0a",
+    rightBg: "#0c120c", rightBorder: "#1a3a1a",
+    orderBg: "#0f1a0f", orderText: "#4ade80", orderBorder: "#1a3a1a",
+    orderBtnBg: "#4ade80", orderBtnText: "#0a0f0a",
+  },
+  {
+    name: "Purple Glass",
+    font: "Inter",
+    bg: "#1a0a2e", border: "#3d2b5e",
+    topbar: "#1a0a2e", topbarText: "#d4b8ff", topbarBorder: "#3d2b5e",
+    tabActive: "#a855f7", tabActiveText: "#fff", tabInactive: "#2d1b4e", tabInactiveText: "#7a5aaa",
+    leftBg: "#1e1038", leftBorder: "#3d2b5e",
+    menuBg: "#2d1b4e", menuText: "#b89adb", chipBg: "#3d2b5e", chipText: "#c4a8e8",
+    centerBg: "#1a0a2e", centerBorder: "#3d2b5e",
+    botBg: "#2d1b4e", botText: "#b89adb",
+    userBg: "#a855f7", userText: "#fff",
+    inputBg: "#2d1b4e", inputText: "#d4b8ff", btnBg: "#a855f7", btnText: "#fff",
+    rightBg: "#1e1038", rightBorder: "#3d2b5e",
+    orderBg: "#2d1b4e", orderText: "#b89adb", orderBorder: "#4a3570",
+    orderBtnBg: "#a855f7", orderBtnText: "#fff",
+  },
+  {
+    name: "Coral Pop",
+    font: "Outfit",
+    bg: "#fff5f5", border: "#fecaca",
+    topbar: "#fff5f5", topbarText: "#991b1b", topbarBorder: "#fecaca",
+    tabActive: "#ef4444", tabActiveText: "#fff", tabInactive: "#fee2e2", tabInactiveText: "#dc2626",
+    leftBg: "#fff0f0", leftBorder: "#fecaca",
+    menuBg: "#fee2e2", menuText: "#7f1d1d", chipBg: "#fecaca", chipText: "#991b1b",
+    centerBg: "#fff5f5", centerBorder: "#fecaca",
+    botBg: "#fee2e2", botText: "#7f1d1d",
+    userBg: "#ef4444", userText: "#fff",
+    inputBg: "#fee2e2", inputText: "#991b1b", btnBg: "#ef4444", btnText: "#fff",
+    rightBg: "#fff0f0", rightBorder: "#fecaca",
+    orderBg: "#fee2e2", orderText: "#7f1d1d", orderBorder: "#fca5a5",
+    orderBtnBg: "#ef4444", orderBtnText: "#fff",
+  },
+  {
+    name: "Slate Pro",
+    font: "Plus Jakarta Sans",
+    bg: "#1e293b", border: "#334155",
+    topbar: "#1e293b", topbarText: "#e2e8f0", topbarBorder: "#334155",
+    tabActive: "#3b82f6", tabActiveText: "#fff", tabInactive: "#273548", tabInactiveText: "#64748b",
+    leftBg: "#1a2435", leftBorder: "#334155",
+    menuBg: "#273548", menuText: "#94a3b8", chipBg: "#334155", chipText: "#94a3b8",
+    centerBg: "#1e293b", centerBorder: "#334155",
+    botBg: "#273548", botText: "#94a3b8",
+    userBg: "#3b82f6", userText: "#fff",
+    inputBg: "#273548", inputText: "#e2e8f0", btnBg: "#3b82f6", btnText: "#fff",
+    rightBg: "#1a2435", rightBorder: "#334155",
+    orderBg: "#273548", orderText: "#94a3b8", orderBorder: "#475569",
+    orderBtnBg: "#3b82f6", orderBtnText: "#fff",
+  },
+  {
+    name: "Emerald",
+    font: "Inter",
+    bg: "#022c22", border: "#064e3b",
+    topbar: "#022c22", topbarText: "#a7f3d0", topbarBorder: "#064e3b",
+    tabActive: "#10b981", tabActiveText: "#fff", tabInactive: "#043d2e", tabInactiveText: "#34d399",
+    leftBg: "#03382a", leftBorder: "#064e3b",
+    menuBg: "#064e3b", menuText: "#6ee7b7", chipBg: "#065f46", chipText: "#6ee7b7",
+    centerBg: "#022c22", centerBorder: "#064e3b",
+    botBg: "#064e3b", botText: "#6ee7b7",
+    userBg: "#10b981", userText: "#fff",
+    inputBg: "#064e3b", inputText: "#a7f3d0", btnBg: "#10b981", btnText: "#fff",
+    rightBg: "#03382a", rightBorder: "#064e3b",
+    orderBg: "#064e3b", orderText: "#6ee7b7", orderBorder: "#065f46",
+    orderBtnBg: "#10b981", orderBtnText: "#fff",
+  },
+  {
+    name: "Amber Luxury",
+    font: "DM Sans",
+    bg: "#1c1208", border: "#3d2a0a",
+    topbar: "#1c1208", topbarText: "#fcd34d", topbarBorder: "#3d2a0a",
+    tabActive: "#f59e0b", tabActiveText: "#1c1208", tabInactive: "#2a1c08", tabInactiveText: "#b8860b",
+    leftBg: "#221608", leftBorder: "#3d2a0a",
+    menuBg: "#2a1c08", menuText: "#d4a447", chipBg: "#3d2a0a", chipText: "#d4a447",
+    centerBg: "#1c1208", centerBorder: "#3d2a0a",
+    botBg: "#2a1c08", botText: "#d4a447",
+    userBg: "#f59e0b", userText: "#1c1208",
+    inputBg: "#2a1c08", inputText: "#fcd34d", btnBg: "#f59e0b", btnText: "#1c1208",
+    rightBg: "#221608", rightBorder: "#3d2a0a",
+    orderBg: "#2a1c08", orderText: "#d4a447", orderBorder: "#4d3a10",
+    orderBtnBg: "#f59e0b", orderBtnText: "#1c1208",
+  },
+  {
+    name: "Rose Minimal",
+    font: "Outfit",
+    bg: "#fff1f2", border: "#ffe4e6",
+    topbar: "#fff1f2", topbarText: "#881337", topbarBorder: "#ffe4e6",
+    tabActive: "#e11d48", tabActiveText: "#fff", tabInactive: "#ffe4e6", tabInactiveText: "#e11d48",
+    leftBg: "#fff5f6", leftBorder: "#ffe4e6",
+    menuBg: "#ffe4e6", menuText: "#881337", chipBg: "#fecdd3", chipText: "#9f1239",
+    centerBg: "#fff1f2", centerBorder: "#ffe4e6",
+    botBg: "#ffe4e6", botText: "#881337",
+    userBg: "#e11d48", userText: "#fff",
+    inputBg: "#ffe4e6", inputText: "#881337", btnBg: "#e11d48", btnText: "#fff",
+    rightBg: "#fff5f6", rightBorder: "#ffe4e6",
+    orderBg: "#ffe4e6", orderText: "#881337", orderBorder: "#fda4af",
+    orderBtnBg: "#e11d48", orderBtnText: "#fff",
+  },
+  {
+    name: "Brutalist",
+    font: "Space Grotesk",
+    bg: "#fff", border: "#000",
+    topbar: "#fff", topbarText: "#000", topbarBorder: "#000",
+    tabActive: "#000", tabActiveText: "#fff", tabInactive: "#fff", tabInactiveText: "#000",
+    leftBg: "#fff", leftBorder: "#000",
+    menuBg: "#f0f0f0", menuText: "#000", chipBg: "#000", chipText: "#fff",
+    centerBg: "#fff", centerBorder: "#000",
+    botBg: "#f0f0f0", botText: "#000",
+    userBg: "#000", userText: "#fff",
+    inputBg: "#f0f0f0", inputText: "#000", btnBg: "#000", btnText: "#fff",
+    rightBg: "#fff", rightBorder: "#000",
+    orderBg: "#f0f0f0", orderText: "#000", orderBorder: "#000",
+    orderBtnBg: "#000", orderBtnText: "#fff",
+    radius: "0px",
+  },
+  {
+    name: "Glass Dark",
+    font: "Inter",
+    bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.1)",
+    topbar: "rgba(255,255,255,0.06)", topbarText: "rgba(255,255,255,0.9)", topbarBorder: "rgba(255,255,255,0.08)",
+    tabActive: "rgba(255,255,255,0.15)", tabActiveText: "#fff", tabInactive: "rgba(255,255,255,0.04)", tabInactiveText: "rgba(255,255,255,0.4)",
+    leftBg: "rgba(255,255,255,0.02)", leftBorder: "rgba(255,255,255,0.06)",
+    menuBg: "rgba(255,255,255,0.05)", menuText: "rgba(255,255,255,0.6)", chipBg: "rgba(255,255,255,0.08)", chipText: "rgba(255,255,255,0.5)",
+    centerBg: "rgba(255,255,255,0.02)", centerBorder: "rgba(255,255,255,0.06)",
+    botBg: "rgba(255,255,255,0.05)", botText: "rgba(255,255,255,0.6)",
+    userBg: "rgba(255,255,255,0.15)", userText: "#fff",
+    inputBg: "rgba(255,255,255,0.05)", inputText: "#fff", btnBg: "rgba(255,255,255,0.15)", btnText: "#fff",
+    rightBg: "rgba(255,255,255,0.02)", rightBorder: "rgba(255,255,255,0.06)",
+    orderBg: "rgba(255,255,255,0.05)", orderText: "rgba(255,255,255,0.6)", orderBorder: "rgba(255,255,255,0.1)",
+    orderBtnBg: "rgba(255,255,255,0.12)", orderBtnText: "#fff",
+  },
+  {
+    name: "Teal Fresh",
+    font: "Plus Jakarta Sans",
+    bg: "#f0fdfa", border: "#ccfbf1",
+    topbar: "#f0fdfa", topbarText: "#134e4a", topbarBorder: "#ccfbf1",
+    tabActive: "#0d9488", tabActiveText: "#fff", tabInactive: "#ccfbf1", tabInactiveText: "#0d9488",
+    leftBg: "#f0fdfa", leftBorder: "#ccfbf1",
+    menuBg: "#ccfbf1", menuText: "#115e59", chipBg: "#99f6e4", chipText: "#0f766e",
+    centerBg: "#f0fdfa", centerBorder: "#ccfbf1",
+    botBg: "#ccfbf1", botText: "#115e59",
+    userBg: "#0d9488", userText: "#fff",
+    inputBg: "#ccfbf1", inputText: "#134e4a", btnBg: "#0d9488", btnText: "#fff",
+    rightBg: "#f0fdfa", rightBorder: "#ccfbf1",
+    orderBg: "#ccfbf1", orderText: "#115e59", orderBorder: "#5eead4",
+    orderBtnBg: "#0d9488", orderBtnText: "#fff",
+  },
+  {
+    name: "Indigo Deep",
+    font: "Inter",
+    bg: "#1e1b4b", border: "#312e81",
+    topbar: "#1e1b4b", topbarText: "#c7d2fe", topbarBorder: "#312e81",
+    tabActive: "#6366f1", tabActiveText: "#fff", tabInactive: "#272462", tabInactiveText: "#818cf8",
+    leftBg: "#211e55", leftBorder: "#312e81",
+    menuBg: "#312e81", menuText: "#a5b4fc", chipBg: "#3730a3", chipText: "#a5b4fc",
+    centerBg: "#1e1b4b", centerBorder: "#312e81",
+    botBg: "#312e81", botText: "#a5b4fc",
+    userBg: "#6366f1", userText: "#fff",
+    inputBg: "#312e81", inputText: "#c7d2fe", btnBg: "#6366f1", btnText: "#fff",
+    rightBg: "#211e55", rightBorder: "#312e81",
+    orderBg: "#312e81", orderText: "#a5b4fc", orderBorder: "#3730a3",
+    orderBtnBg: "#6366f1", orderBtnText: "#fff",
+  },
+  {
+    name: "Peach Soft",
+    font: "DM Sans",
+    bg: "#fff7ed", border: "#fed7aa",
+    topbar: "#fff7ed", topbarText: "#7c2d12", topbarBorder: "#fed7aa",
+    tabActive: "#ea580c", tabActiveText: "#fff", tabInactive: "#ffedd5", tabInactiveText: "#c2410c",
+    leftBg: "#fff7ed", leftBorder: "#fed7aa",
+    menuBg: "#ffedd5", menuText: "#7c2d12", chipBg: "#fed7aa", chipText: "#9a3412",
+    centerBg: "#fff7ed", centerBorder: "#fed7aa",
+    botBg: "#ffedd5", botText: "#7c2d12",
+    userBg: "#ea580c", userText: "#fff",
+    inputBg: "#ffedd5", inputText: "#7c2d12", btnBg: "#ea580c", btnText: "#fff",
+    rightBg: "#fff7ed", rightBorder: "#fed7aa",
+    orderBg: "#ffedd5", orderText: "#7c2d12", orderBorder: "#fdba74",
+    orderBtnBg: "#ea580c", orderBtnText: "#fff",
+  },
+  {
+    name: "Zinc Neutral",
+    font: "Inter",
+    bg: "#18181b", border: "#27272a",
+    topbar: "#18181b", topbarText: "#d4d4d8", topbarBorder: "#27272a",
+    tabActive: "#d4d4d8", tabActiveText: "#18181b", tabInactive: "#27272a", tabInactiveText: "#71717a",
+    leftBg: "#1c1c1f", leftBorder: "#27272a",
+    menuBg: "#27272a", menuText: "#a1a1aa", chipBg: "#3f3f46", chipText: "#a1a1aa",
+    centerBg: "#18181b", centerBorder: "#27272a",
+    botBg: "#27272a", botText: "#a1a1aa",
+    userBg: "#52525b", userText: "#fafafa",
+    inputBg: "#27272a", inputText: "#d4d4d8", btnBg: "#d4d4d8", btnText: "#18181b",
+    rightBg: "#1c1c1f", rightBorder: "#27272a",
+    orderBg: "#27272a", orderText: "#a1a1aa", orderBorder: "#3f3f46",
+    orderBtnBg: "#d4d4d8", orderBtnText: "#18181b",
+  },
+  {
+    name: "Sky Bright",
+    font: "Outfit",
+    bg: "#f0f9ff", border: "#bae6fd",
+    topbar: "#f0f9ff", topbarText: "#0c4a6e", topbarBorder: "#bae6fd",
+    tabActive: "#0284c7", tabActiveText: "#fff", tabInactive: "#e0f2fe", tabInactiveText: "#0284c7",
+    leftBg: "#f0f9ff", leftBorder: "#bae6fd",
+    menuBg: "#e0f2fe", menuText: "#075985", chipBg: "#bae6fd", chipText: "#0369a1",
+    centerBg: "#f0f9ff", centerBorder: "#bae6fd",
+    botBg: "#e0f2fe", botText: "#075985",
+    userBg: "#0284c7", userText: "#fff",
+    inputBg: "#e0f2fe", inputText: "#0c4a6e", btnBg: "#0284c7", btnText: "#fff",
+    rightBg: "#f0f9ff", rightBorder: "#bae6fd",
+    orderBg: "#e0f2fe", orderText: "#075985", orderBorder: "#7dd3fc",
+    orderBtnBg: "#0284c7", orderBtnText: "#fff",
+  },
+  {
+    name: "Charcoal Rounded",
+    font: "Plus Jakarta Sans",
+    bg: "#262626", border: "#404040",
+    topbar: "#262626", topbarText: "#e5e5e5", topbarBorder: "#333",
+    tabActive: "#f5f5f5", tabActiveText: "#171717", tabInactive: "#333", tabInactiveText: "#888",
+    leftBg: "#2a2a2a", leftBorder: "#383838",
+    menuBg: "#333", menuText: "#aaa", chipBg: "#404040", chipText: "#bbb",
+    centerBg: "#262626", centerBorder: "#383838",
+    botBg: "#333", botText: "#a3a3a3",
+    userBg: "#f5f5f5", userText: "#171717",
+    inputBg: "#333", inputText: "#e5e5e5", btnBg: "#f5f5f5", btnText: "#171717",
+    rightBg: "#2a2a2a", rightBorder: "#383838",
+    orderBg: "#333", orderText: "#a3a3a3", orderBorder: "#444",
+    orderBtnBg: "#f5f5f5", orderBtnText: "#171717",
+    radius: "24px",
+  },
+  {
+    name: "WhatsApp Native",
+    font: "Inter",
+    bg: "#0b141a", border: "#222d34",
+    topbar: "#202c33", topbarText: "#e9edef", topbarBorder: "#202c33",
+    tabActive: "#00a884", tabActiveText: "#fff", tabInactive: "#2a3942", tabInactiveText: "#00a884",
+    leftBg: "#111b21", leftBorder: "#222d34",
+    menuBg: "#1a2730", menuText: "#8696a0", chipBg: "#233138", chipText: "#8696a0",
+    centerBg: "#0b141a", centerBorder: "#222d34",
+    botBg: "#202c33", botText: "#e9edef",
+    userBg: "#005c4b", userText: "#e9edef",
+    inputBg: "#2a3942", inputText: "#e9edef", btnBg: "#00a884", btnText: "#fff",
+    rightBg: "#111b21", rightBorder: "#222d34",
+    orderBg: "#1a2730", orderText: "#e9edef", orderBorder: "#2a3942",
+    orderBtnBg: "#00a884", orderBtnText: "#fff",
+  },
+];
+
+function renderVariant(s, i) {
+  const r = s.radius || '16px';
+  const chipR = s.radius === '0px' ? '0px' : '6px';
+  return `
 <div>
-<div class="variant-label">01 &mdash; Minimal Dark</div>
-<div class="card card-chat" style="background: #111; border: 1px solid #222;">
-  <div class="card-header" style="border-bottom: 1px solid #1a1a1a; color: #fff;">
-    AI Order <span class="badge" style="background: #1a1a1a; color: #888;">New Order</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #1a1a1a; color: #aaa;">What would you like to order?</div>
-    <div class="card-msg user" style="background: #fff; color: #000;">1 boba 50% sugar no ice add pearl</div>
-    <div class="card-msg bot" style="background: #1a1a1a; color: #aaa;">
-      <div class="card-order-item"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
-      <div class="card-order-item detail"><span>50% sugar, no ice, +pearl</span></div>
+  <div class="variant-label">${String(i+1).padStart(2,'0')} &mdash; ${s.name}</div>
+  <div class="card-wrap" style="border-radius:${r}; border:1px solid ${s.border}; overflow:hidden; font-family:'${s.font}',sans-serif;">
+    <div class="card-topbar" style="background:${s.topbar}; color:${s.topbarText}; border-bottom:1px solid ${s.topbarBorder};">
+      <span>AI Order</span>
+      <div class="tabs">
+        <div class="tab" style="background:${s.tabActive}; color:${s.tabActiveText}; border-radius:${chipR};">Place Order</div>
+        <div class="tab" style="background:${s.tabInactive}; color:${s.tabInactiveText}; border-radius:${chipR};">Edit Order</div>
+      </div>
+    </div>
+    <div class="card" style="background:${s.bg}; border-radius:0; height:380px;">
+      <div class="left" style="background:${s.leftBg}; border-right:1px solid ${s.leftBorder};">
+        <div class="panel-title" style="color:${s.menuText};">Menu</div>
+        <div class="menu-item" style="background:${s.menuBg}; color:${s.menuText}; border-radius:${chipR};">
+          <div class="name"><span>Brown Sugar Boba</span><span>$4.50</span></div>
+          <div class="opt-label">Sugar</div>
+          <div class="chips">
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">0%</span>
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">25%</span>
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">50%</span>
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">75%</span>
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">100%</span>
+          </div>
+          <div class="opt-label">Ice</div>
+          <div class="chips">
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">none</span>
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">less</span>
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">normal</span>
+          </div>
+          <div class="opt-label">Toppings +$0.50</div>
+          <div class="chips">
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">pearl</span>
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">jelly</span>
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">pudding</span>
+          </div>
+        </div>
+        <div class="menu-item" style="background:${s.menuBg}; color:${s.menuText}; border-radius:${chipR};">
+          <div class="name"><span>Teh C</span><span>$3.80</span></div>
+          <div class="opt-label">Sugar</div>
+          <div class="chips">
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">kosong</span>
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">siu dai</span>
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">normal</span>
+          </div>
+          <div class="opt-label">Temp</div>
+          <div class="chips">
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">hot</span>
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">cold</span>
+          </div>
+        </div>
+        <div class="menu-item" style="background:${s.menuBg}; color:${s.menuText}; border-radius:${chipR};">
+          <div class="name"><span>Nasi Lemak</span><span>$5.50</span></div>
+          <div class="opt-label">Spice</div>
+          <div class="chips">
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">mild</span>
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">normal</span>
+            <span class="chip" style="background:${s.chipBg}; color:${s.chipText}; border-radius:${chipR};">extra</span>
+          </div>
+        </div>
+      </div>
+      <div class="center" style="background:${s.centerBg}; border-right:1px solid ${s.centerBorder};">
+        <div class="messages">
+          <div class="msg bot" style="background:${s.botBg}; color:${s.botText};">What would you like to order?</div>
+          <div class="msg user" style="background:${s.userBg}; color:${s.userText};">1 boba 50% sugar no ice add pearl, and 1 nasi lemak extra spicy</div>
+          <div class="msg bot" style="background:${s.botBg}; color:${s.botText};">Here's your order! See the formatted order on the right.</div>
+        </div>
+        <div class="chat-input" style="border-top:1px solid ${s.centerBorder};">
+          <input style="background:${s.inputBg}; color:${s.inputText}; border-radius:${chipR};" placeholder="Type your order...">
+          <button style="background:${s.btnBg}; color:${s.btnText}; border-radius:${chipR};">Send</button>
+        </div>
+      </div>
+      <div class="right" style="background:${s.rightBg}; border-left:1px solid ${s.rightBorder};">
+        <div class="panel-title" style="color:${s.orderText};">Formatted Order</div>
+        <div class="order-box" style="background:${s.orderBg}; color:${s.orderText}; border-radius:${chipR};">
+          <div class="title" style="border-bottom:1px solid ${s.orderBorder};">Order #1042</div>
+          <div class="order-line"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
+          <div class="order-line detail"><span>50% sugar, no ice</span></div>
+          <div class="order-line detail"><span>+ pearl ($0.50)</span></div>
+          <div style="height:6px;"></div>
+          <div class="order-line"><span>1x Nasi Lemak</span><span>$5.50</span></div>
+          <div class="order-line detail"><span>extra spicy</span></div>
+          <div class="order-total" style="border-top:1px solid ${s.orderBorder};"><span>TOTAL</span><span>$10.50</span></div>
+        </div>
+        <button class="order-btn" style="background:${s.orderBtnBg}; color:${s.orderBtnText}; border-radius:${chipR};">Create Order</button>
+      </div>
     </div>
   </div>
-  <div class="card-input" style="border-top: 1px solid #1a1a1a;">
-    <input style="background: #1a1a1a; color: #fff;" placeholder="Type your order...">
-    <button style="background: #fff; color: #000;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #fff; color: #000;">Create Order</div>
-</div>
-</div>
+</div>`;
+}
 
-<!-- 2. Soft White -->
-<div>
-<div class="variant-label">02 &mdash; Soft White</div>
-<div class="card card-chat" style="background: #fff; border: 1px solid #e8e8e8;">
-  <div class="card-header" style="border-bottom: 1px solid #f0f0f0; color: #111;">
-    AI Order <span class="badge" style="background: #f5f5f5; color: #666;">New Order</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #f7f7f7; color: #333;">What would you like to order?</div>
-    <div class="card-msg user" style="background: #111; color: #fff;">1 teh c siu dai cold</div>
-    <div class="card-msg bot" style="background: #f7f7f7; color: #333;">
-      <div class="card-order-item"><span>1x Teh C</span><span>$3.80</span></div>
-      <div class="card-order-item detail"><span>siu dai, cold</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #f0f0f0;">
-    <input style="background: #f5f5f5; color: #111;" placeholder="Type your order...">
-    <button style="background: #111; color: #fff;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #111; color: #fff;">Create Order</div>
-</div>
-</div>
-
-<!-- 3. Ocean Blue -->
-<div>
-<div class="variant-label">03 &mdash; Ocean Blue</div>
-<div class="card card-chat" style="background: #0c1929; border: 1px solid #1a3050;">
-  <div class="card-header" style="border-bottom: 1px solid #1a3050; color: #e0f0ff;">
-    AI Order <span class="badge" style="background: #0a4d8c; color: #7ec8ff;">Active</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #112840; color: #8cb8d8;">What would you like to order?</div>
-    <div class="card-msg user" style="background: #0a6abf; color: #fff;">nasi lemak extra spicy with egg</div>
-    <div class="card-msg bot" style="background: #112840; color: #8cb8d8;">
-      <div class="card-order-item"><span>1x Nasi Lemak</span><span>$5.50</span></div>
-      <div class="card-order-item detail"><span>extra spicy, +egg</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #1a3050;">
-    <input style="background: #112840; color: #e0f0ff;" placeholder="Type your order...">
-    <button style="background: #0a6abf; color: #fff;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #0a6abf; color: #fff;">Create Order</div>
-</div>
-</div>
-
-<!-- 4. Warm Sand -->
-<div>
-<div class="variant-label">04 &mdash; Warm Sand</div>
-<div class="card card-chat" style="background: #faf6f0; border: 1px solid #e8ddd0; font-family: 'DM Sans', sans-serif;">
-  <div class="card-header" style="border-bottom: 1px solid #e8ddd0; color: #3d2e1c;">
-    AI Order <span class="badge" style="background: #e8ddd0; color: #8a6d4a;">Ordering</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #f0e8da; color: #5a4530; border-radius: 4px 16px 16px 16px;">What would you like?</div>
-    <div class="card-msg user" style="background: #3d2e1c; color: #faf6f0; border-radius: 16px 4px 16px 16px;">kopi gao kosong hot</div>
-    <div class="card-msg bot" style="background: #f0e8da; color: #5a4530; border-radius: 4px 16px 16px 16px;">
-      <div class="card-order-item"><span>1x Kopi Gao</span><span>$4.00</span></div>
-      <div class="card-order-item detail"><span>kosong, hot</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #e8ddd0;">
-    <input style="background: #f0e8da; color: #3d2e1c;" placeholder="Type your order...">
-    <button style="background: #3d2e1c; color: #faf6f0;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #3d2e1c; color: #faf6f0;">Create Order</div>
-</div>
-</div>
-
-<!-- 5. Neon Green -->
-<div>
-<div class="variant-label">05 &mdash; Neon Terminal</div>
-<div class="card card-chat" style="background: #0a0f0a; border: 1px solid #1a3a1a; font-family: 'Space Grotesk', monospace;">
-  <div class="card-header" style="border-bottom: 1px solid #1a3a1a; color: #4ade80;">
-    AI_ORDER <span class="badge" style="background: #0f1f0f; color: #4ade80; border: 1px solid #1a3a1a;">LIVE</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #0f1a0f; color: #4ade80; border: 1px solid #1a3a1a;">$ ready for order</div>
-    <div class="card-msg user" style="background: #4ade80; color: #0a0f0a;">1 boba 25% ice less pearl jelly</div>
-    <div class="card-msg bot" style="background: #0f1a0f; color: #4ade80; border: 1px solid #1a3a1a;">
-      <div class="card-order-item"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
-      <div class="card-order-item detail"><span>25% sugar, less ice, +pearl, +jelly</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #1a3a1a;">
-    <input style="background: #0f1a0f; color: #4ade80; border: 1px solid #1a3a1a;" placeholder="> order...">
-    <button style="background: #4ade80; color: #0a0f0a;">RUN</button>
-  </div>
-  <div class="card-btn" style="background: #4ade80; color: #0a0f0a;">EXECUTE ORDER</div>
-</div>
-</div>
-
-<!-- 6. Purple Gradient -->
-<div>
-<div class="variant-label">06 &mdash; Purple Glass</div>
-<div class="card card-chat" style="background: linear-gradient(135deg, #1a0a2e, #2d1b4e); border: 1px solid #3d2b5e;">
-  <div class="card-header" style="border-bottom: 1px solid #3d2b5e; color: #d4b8ff;">
-    AI Order <span class="badge" style="background: rgba(168,85,247,0.2); color: #a855f7;">New</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: rgba(255,255,255,0.05); color: #b89adb; backdrop-filter: blur(4px);">What can I get for you?</div>
-    <div class="card-msg user" style="background: #a855f7; color: #fff;">milo dinosaur tabao</div>
-    <div class="card-msg bot" style="background: rgba(255,255,255,0.05); color: #b89adb;">
-      <div class="card-order-item"><span>1x Milo Dinosaur</span><span>$4.20</span></div>
-      <div class="card-order-item detail"><span>takeaway</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #3d2b5e;">
-    <input style="background: rgba(255,255,255,0.06); color: #d4b8ff;" placeholder="Type your order...">
-    <button style="background: #a855f7; color: #fff;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #a855f7; color: #fff;">Create Order</div>
-</div>
-</div>
-
-<!-- 7. Coral Pink -->
-<div>
-<div class="variant-label">07 &mdash; Coral Pop</div>
-<div class="card card-chat" style="background: #fff5f5; border: 1px solid #fecaca; font-family: 'Outfit', sans-serif;">
-  <div class="card-header" style="border-bottom: 1px solid #fecaca; color: #991b1b;">
-    AI Order <span class="badge" style="background: #fee2e2; color: #dc2626;">Hot</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #fee2e2; color: #7f1d1d;">What's your order?</div>
-    <div class="card-msg user" style="background: #ef4444; color: #fff;">nasi lemak mild with chicken</div>
-    <div class="card-msg bot" style="background: #fee2e2; color: #7f1d1d;">
-      <div class="card-order-item"><span>1x Nasi Lemak</span><span>$5.50</span></div>
-      <div class="card-order-item detail"><span>mild, +chicken</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #fecaca;">
-    <input style="background: #fee2e2; color: #991b1b;" placeholder="Type your order...">
-    <button style="background: #ef4444; color: #fff;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #ef4444; color: #fff;">Create Order</div>
-</div>
-</div>
-
-<!-- 8. Slate Pro -->
-<div>
-<div class="variant-label">08 &mdash; Slate Pro</div>
-<div class="card card-chat" style="background: #1e293b; border: 1px solid #334155; font-family: 'Plus Jakarta Sans', sans-serif;">
-  <div class="card-header" style="border-bottom: 1px solid #334155; color: #e2e8f0;">
-    AI Order <span class="badge" style="background: #334155; color: #94a3b8;">v1.0</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #273548; color: #94a3b8;">Ready for your order.</div>
-    <div class="card-msg user" style="background: #3b82f6; color: #fff;">2 teh c kosong cold</div>
-    <div class="card-msg bot" style="background: #273548; color: #94a3b8;">
-      <div class="card-order-item"><span>2x Teh C</span><span>$7.60</span></div>
-      <div class="card-order-item detail"><span>kosong, cold</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #334155;">
-    <input style="background: #273548; color: #e2e8f0;" placeholder="Type your order...">
-    <button style="background: #3b82f6; color: #fff;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #3b82f6; color: #fff;">Create Order</div>
-</div>
-</div>
-
-<!-- 9. Emerald -->
-<div>
-<div class="variant-label">09 &mdash; Emerald</div>
-<div class="card card-chat" style="background: #022c22; border: 1px solid #064e3b;">
-  <div class="card-header" style="border-bottom: 1px solid #064e3b; color: #a7f3d0;">
-    AI Order <span class="badge" style="background: #064e3b; color: #34d399;">Ready</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #064e3b; color: #6ee7b7;">What would you like?</div>
-    <div class="card-msg user" style="background: #10b981; color: #fff;">boba 100% sugar normal ice pudding</div>
-    <div class="card-msg bot" style="background: #064e3b; color: #6ee7b7;">
-      <div class="card-order-item"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
-      <div class="card-order-item detail"><span>100% sugar, normal ice, +pudding</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #064e3b;">
-    <input style="background: #064e3b; color: #a7f3d0;" placeholder="Type your order...">
-    <button style="background: #10b981; color: #fff;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #10b981; color: #fff;">Create Order</div>
-</div>
-</div>
-
-<!-- 10. Amber Luxury -->
-<div>
-<div class="variant-label">10 &mdash; Amber Luxury</div>
-<div class="card card-chat" style="background: #1c1208; border: 1px solid #3d2a0a; font-family: 'DM Sans', sans-serif;">
-  <div class="card-header" style="border-bottom: 1px solid #3d2a0a; color: #fcd34d;">
-    AI Order <span class="badge" style="background: #3d2a0a; color: #f59e0b;">Premium</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #2a1c08; color: #d4a447;">Welcome. What would you like?</div>
-    <div class="card-msg user" style="background: #f59e0b; color: #1c1208;">kopi gao gah dai hot</div>
-    <div class="card-msg bot" style="background: #2a1c08; color: #d4a447;">
-      <div class="card-order-item"><span>1x Kopi Gao</span><span>$4.00</span></div>
-      <div class="card-order-item detail"><span>gah dai, hot</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #3d2a0a;">
-    <input style="background: #2a1c08; color: #fcd34d;" placeholder="Type your order...">
-    <button style="background: #f59e0b; color: #1c1208;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #f59e0b; color: #1c1208;">Create Order</div>
-</div>
-</div>
-
-<!-- 11. Rose Minimal -->
-<div>
-<div class="variant-label">11 &mdash; Rose Minimal</div>
-<div class="card card-chat" style="background: #fff1f2; border: 1px solid #ffe4e6; font-family: 'Outfit', sans-serif;">
-  <div class="card-header" style="border-bottom: 1px solid #ffe4e6; color: #881337;">
-    AI Order <span class="badge" style="background: #ffe4e6; color: #e11d48;">New</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #ffe4e6; color: #881337; border-radius: 4px 16px 16px 16px;">Hi! Ready to order?</div>
-    <div class="card-msg user" style="background: #e11d48; color: #fff; border-radius: 16px 4px 16px 16px;">1 nasi lemak normal otah egg</div>
-    <div class="card-msg bot" style="background: #ffe4e6; color: #881337; border-radius: 4px 16px 16px 16px;">
-      <div class="card-order-item"><span>1x Nasi Lemak</span><span>$5.50</span></div>
-      <div class="card-order-item detail"><span>normal, +otah, +egg</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #ffe4e6;">
-    <input style="background: #ffe4e6; color: #881337;" placeholder="Type your order...">
-    <button style="background: #e11d48; color: #fff;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #e11d48; color: #fff; border-radius: 20px;">Create Order</div>
-</div>
-</div>
-
-<!-- 12. Brutalist -->
-<div>
-<div class="variant-label">12 &mdash; Brutalist</div>
-<div class="card card-chat" style="background: #fff; border: 3px solid #000; border-radius: 0; font-family: 'Space Grotesk', sans-serif;">
-  <div class="card-header" style="border-bottom: 3px solid #000; color: #000; text-transform: uppercase; letter-spacing: 2px;">
-    ORDER <span class="badge" style="background: #000; color: #fff; border-radius: 0;">NEW</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #f0f0f0; color: #000; border: 2px solid #000; border-radius: 0;">WHAT DO YOU WANT?</div>
-    <div class="card-msg user" style="background: #000; color: #fff; border-radius: 0;">teh c siu dai hot</div>
-    <div class="card-msg bot" style="background: #f0f0f0; color: #000; border: 2px solid #000; border-radius: 0;">
-      <div class="card-order-item"><span>1x TEH C</span><span>$3.80</span></div>
-      <div class="card-order-item detail"><span>SIU DAI, HOT</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 3px solid #000;">
-    <input style="background: #f0f0f0; color: #000; border: 2px solid #000; border-radius: 0;" placeholder="ORDER...">
-    <button style="background: #000; color: #fff; border-radius: 0;">GO</button>
-  </div>
-  <div class="card-btn" style="background: #000; color: #fff; border-radius: 0; text-transform: uppercase; letter-spacing: 2px;">Create Order</div>
-</div>
-</div>
-
-<!-- 13. Glassmorphism -->
-<div>
-<div class="variant-label">13 &mdash; Glass</div>
-<div class="card card-chat" style="background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(10px);">
-  <div class="card-header" style="border-bottom: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.9);">
-    AI Order <span class="badge" style="background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5);">Order</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6);">What would you like?</div>
-    <div class="card-msg user" style="background: rgba(255,255,255,0.15); color: #fff;">boba 50% no ice pearl</div>
-    <div class="card-msg bot" style="background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6);">
-      <div class="card-order-item"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
-      <div class="card-order-item detail"><span>50% sugar, no ice, +pearl</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid rgba(255,255,255,0.08);">
-    <input style="background: rgba(255,255,255,0.06); color: #fff;" placeholder="Type your order...">
-    <button style="background: rgba(255,255,255,0.15); color: #fff;">Send</button>
-  </div>
-  <div class="card-btn" style="background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.15);">Create Order</div>
-</div>
-</div>
-
-<!-- 14. Teal Fresh -->
-<div>
-<div class="variant-label">14 &mdash; Teal Fresh</div>
-<div class="card card-chat" style="background: #f0fdfa; border: 1px solid #ccfbf1; font-family: 'Plus Jakarta Sans', sans-serif;">
-  <div class="card-header" style="border-bottom: 1px solid #ccfbf1; color: #134e4a;">
-    AI Order <span class="badge" style="background: #ccfbf1; color: #0d9488;">Active</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #ccfbf1; color: #115e59;">Ready for your order!</div>
-    <div class="card-msg user" style="background: #0d9488; color: #fff;">kopi gao normal cold</div>
-    <div class="card-msg bot" style="background: #ccfbf1; color: #115e59;">
-      <div class="card-order-item"><span>1x Kopi Gao</span><span>$4.00</span></div>
-      <div class="card-order-item detail"><span>normal sugar, cold</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #ccfbf1;">
-    <input style="background: #ccfbf1; color: #134e4a;" placeholder="Type your order...">
-    <button style="background: #0d9488; color: #fff;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #0d9488; color: #fff;">Create Order</div>
-</div>
-</div>
-
-<!-- 15. Indigo Deep -->
-<div>
-<div class="variant-label">15 &mdash; Indigo Deep</div>
-<div class="card card-chat" style="background: #1e1b4b; border: 1px solid #312e81;">
-  <div class="card-header" style="border-bottom: 1px solid #312e81; color: #c7d2fe;">
-    AI Order <span class="badge" style="background: #312e81; color: #818cf8;">New</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #312e81; color: #a5b4fc;">What can I get you?</div>
-    <div class="card-msg user" style="background: #6366f1; color: #fff;">2 boba 75% sugar less ice jelly</div>
-    <div class="card-msg bot" style="background: #312e81; color: #a5b4fc;">
-      <div class="card-order-item"><span>2x Brown Sugar Boba</span><span>$9.00</span></div>
-      <div class="card-order-item detail"><span>75% sugar, less ice, +jelly</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #312e81;">
-    <input style="background: #312e81; color: #c7d2fe;" placeholder="Type your order...">
-    <button style="background: #6366f1; color: #fff;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #6366f1; color: #fff;">Create Order</div>
-</div>
-</div>
-
-<!-- 16. Peach Soft -->
-<div>
-<div class="variant-label">16 &mdash; Peach Soft</div>
-<div class="card card-chat" style="background: #fff7ed; border: 1px solid #fed7aa; font-family: 'DM Sans', sans-serif;">
-  <div class="card-header" style="border-bottom: 1px solid #fed7aa; color: #7c2d12;">
-    AI Order <span class="badge" style="background: #fed7aa; color: #c2410c;">Order</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #ffedd5; color: #7c2d12; border-radius: 6px 18px 18px 18px;">Hi! What would you like?</div>
-    <div class="card-msg user" style="background: #ea580c; color: #fff; border-radius: 18px 6px 18px 18px;">nasi lemak normal chicken egg</div>
-    <div class="card-msg bot" style="background: #ffedd5; color: #7c2d12; border-radius: 6px 18px 18px 18px;">
-      <div class="card-order-item"><span>1x Nasi Lemak</span><span>$5.50</span></div>
-      <div class="card-order-item detail"><span>normal, +chicken, +egg</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #fed7aa;">
-    <input style="background: #ffedd5; color: #7c2d12;" placeholder="Type your order...">
-    <button style="background: #ea580c; color: #fff;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #ea580c; color: #fff;">Create Order</div>
-</div>
-</div>
-
-<!-- 17. Zinc Neutral -->
-<div>
-<div class="variant-label">17 &mdash; Zinc Neutral</div>
-<div class="card card-chat" style="background: #18181b; border: 1px solid #27272a; font-family: 'Inter', sans-serif;">
-  <div class="card-header" style="border-bottom: 1px solid #27272a; color: #d4d4d8;">
-    AI Order <span class="badge" style="background: #27272a; color: #71717a;">v1</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #27272a; color: #a1a1aa;">Order something.</div>
-    <div class="card-msg user" style="background: #52525b; color: #fafafa;">teh c normal hot</div>
-    <div class="card-msg bot" style="background: #27272a; color: #a1a1aa;">
-      <div class="card-order-item"><span>1x Teh C</span><span>$3.80</span></div>
-      <div class="card-order-item detail"><span>normal, hot</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #27272a;">
-    <input style="background: #27272a; color: #d4d4d8;" placeholder="Type your order...">
-    <button style="background: #d4d4d8; color: #18181b;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #d4d4d8; color: #18181b;">Create Order</div>
-</div>
-</div>
-
-<!-- 18. Sky Bright -->
-<div>
-<div class="variant-label">18 &mdash; Sky Bright</div>
-<div class="card card-chat" style="background: #f0f9ff; border: 1px solid #bae6fd; font-family: 'Outfit', sans-serif;">
-  <div class="card-header" style="border-bottom: 1px solid #bae6fd; color: #0c4a6e;">
-    AI Order <span class="badge" style="background: #bae6fd; color: #0284c7;">Open</span>
-  </div>
-  <div class="card-messages">
-    <div class="card-msg bot" style="background: #e0f2fe; color: #075985;">What are you having?</div>
-    <div class="card-msg user" style="background: #0284c7; color: #fff;">milo dinosaur here</div>
-    <div class="card-msg bot" style="background: #e0f2fe; color: #075985;">
-      <div class="card-order-item"><span>1x Milo Dinosaur</span><span>$4.20</span></div>
-      <div class="card-order-item detail"><span>dine in</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #bae6fd;">
-    <input style="background: #e0f2fe; color: #0c4a6e;" placeholder="Type your order...">
-    <button style="background: #0284c7; color: #fff;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #0284c7; color: #fff;">Create Order</div>
-</div>
-</div>
-
-<!-- 19. Charcoal Rounded -->
-<div>
-<div class="variant-label">19 &mdash; Charcoal Rounded</div>
-<div class="card card-chat" style="background: #262626; border: 1px solid #404040; border-radius: 24px; font-family: 'Plus Jakarta Sans', sans-serif;">
-  <div class="card-header" style="border-bottom: 1px solid #333; color: #e5e5e5; padding: 20px 24px;">
-    AI Order <span class="badge" style="background: #404040; color: #a3a3a3; border-radius: 12px;">Order</span>
-  </div>
-  <div class="card-messages" style="padding: 16px 20px;">
-    <div class="card-msg bot" style="background: #333; color: #a3a3a3; border-radius: 6px 20px 20px 20px;">Hey! What do you want?</div>
-    <div class="card-msg user" style="background: #f5f5f5; color: #171717; border-radius: 20px 6px 20px 20px;">boba 0% sugar no ice</div>
-    <div class="card-msg bot" style="background: #333; color: #a3a3a3; border-radius: 6px 20px 20px 20px;">
-      <div class="card-order-item"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
-      <div class="card-order-item detail"><span>0% sugar, no ice</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="border-top: 1px solid #333; padding: 16px 20px;">
-    <input style="background: #333; color: #e5e5e5; border-radius: 14px;" placeholder="Type your order...">
-    <button style="background: #f5f5f5; color: #171717; border-radius: 14px;">Send</button>
-  </div>
-  <div class="card-btn" style="background: #f5f5f5; color: #171717; border-radius: 14px; margin: 0 20px 16px;">Create Order</div>
-</div>
-</div>
-
-<!-- 20. WhatsApp -->
-<div>
-<div class="variant-label">20 &mdash; WhatsApp Native</div>
-<div class="card card-chat" style="background: #0b141a; border: 1px solid #222d34;">
-  <div class="card-header" style="background: #202c33; border-bottom: none; color: #e9edef;">
-    AI Order Bot <span class="badge" style="background: #00a884; color: #fff;">Online</span>
-  </div>
-  <div class="card-messages" style="background: #0b141a;">
-    <div class="card-msg bot" style="background: #202c33; color: #e9edef; border-radius: 0 8px 8px 8px;">Hello! Send me your order</div>
-    <div class="card-msg user" style="background: #005c4b; color: #e9edef; border-radius: 8px 0 8px 8px;">1 kopi gao kosong hot and 1 nasi lemak extra spicy</div>
-    <div class="card-msg bot" style="background: #202c33; color: #e9edef; border-radius: 0 8px 8px 8px;">
-      <div class="card-order-item"><span>1x Kopi Gao</span><span>$4.00</span></div>
-      <div class="card-order-item detail"><span>kosong, hot</span></div>
-      <div class="card-order-item" style="margin-top: 4px;"><span>1x Nasi Lemak</span><span>$5.50</span></div>
-      <div class="card-order-item detail"><span>extra spicy</span></div>
-      <div class="card-order-total" style="border-top: 1px solid #374045;"><span>Total</span><span>$9.50</span></div>
-    </div>
-  </div>
-  <div class="card-input" style="background: #202c33; border-top: none;">
-    <input style="background: #2a3942; color: #e9edef; border-radius: 20px;" placeholder="Type a message">
-    <button style="background: #00a884; color: #fff; border-radius: 50%; width: 40px; height: 40px; padding: 0;">&#x27A4;</button>
-  </div>
-  <div class="card-btn" style="background: #00a884; color: #fff;">Create Order</div>
-</div>
-</div>
-
-</div>
+document.getElementById('variants').innerHTML = STYLES.map(renderVariant).join('');
+</script>
 
 </body>
 </html>
