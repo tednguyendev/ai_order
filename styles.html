@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Order - 20 Style Variants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; padding: 40px 24px; }
+  h1 { text-align: center; font-size: 28px; font-weight: 300; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 40px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 24px; max-width: 1600px; margin: 0 auto; }
+  .variant-label { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 500; }
+
+  /* Shared chat structure */
+  .card { border-radius: 16px; overflow: hidden; }
+  .card-chat { display: flex; flex-direction: column; height: 420px; }
+  .card-header { padding: 16px 20px; font-weight: 600; font-size: 14px; display: flex; align-items: center; justify-content: space-between; }
+  .card-header .badge { font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 500; }
+  .card-messages { flex: 1; padding: 12px 16px; overflow: hidden; display: flex; flex-direction: column; gap: 8px; }
+  .card-msg { padding: 10px 14px; border-radius: 12px; font-size: 12px; line-height: 1.5; max-width: 85%; }
+  .card-msg.bot { align-self: flex-start; }
+  .card-msg.user { align-self: flex-end; }
+  .card-order { padding: 12px 16px; font-size: 11px; }
+  .card-order-item { display: flex; justify-content: space-between; padding: 3px 0; }
+  .card-order-item.detail { padding-left: 14px; opacity: 0.6; font-size: 10px; }
+  .card-order-total { display: flex; justify-content: space-between; font-weight: 700; padding-top: 6px; margin-top: 6px; }
+  .card-input { padding: 12px 16px; display: flex; gap: 8px; }
+  .card-input input { flex: 1; border: none; outline: none; font-size: 12px; padding: 10px 14px; border-radius: 10px; font-family: inherit; }
+  .card-input button { border: none; padding: 10px 18px; border-radius: 10px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .card-btn { margin: 0 16px 12px; padding: 10px; border: none; border-radius: 10px; font-size: 12px; font-weight: 600; cursor: pointer; text-align: center; font-family: inherit; }
+  .menu-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .menu-chip { font-size: 9px; padding: 2px 7px; border-radius: 8px; }
+</style>
+</head>
+<body>
+
+<h1>AI Order &mdash; Style Exploration</h1>
+<p class="subtitle">20 variants &middot; modern &middot; professional</p>
+
+<div class="grid">
+
+<!-- 1. Minimal Dark -->
+<div>
+<div class="variant-label">01 &mdash; Minimal Dark</div>
+<div class="card card-chat" style="background: #111; border: 1px solid #222;">
+  <div class="card-header" style="border-bottom: 1px solid #1a1a1a; color: #fff;">
+    AI Order <span class="badge" style="background: #1a1a1a; color: #888;">New Order</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #1a1a1a; color: #aaa;">What would you like to order?</div>
+    <div class="card-msg user" style="background: #fff; color: #000;">1 boba 50% sugar no ice add pearl</div>
+    <div class="card-msg bot" style="background: #1a1a1a; color: #aaa;">
+      <div class="card-order-item"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
+      <div class="card-order-item detail"><span>50% sugar, no ice, +pearl</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #1a1a1a;">
+    <input style="background: #1a1a1a; color: #fff;" placeholder="Type your order...">
+    <button style="background: #fff; color: #000;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #fff; color: #000;">Create Order</div>
+</div>
+</div>
+
+<!-- 2. Soft White -->
+<div>
+<div class="variant-label">02 &mdash; Soft White</div>
+<div class="card card-chat" style="background: #fff; border: 1px solid #e8e8e8;">
+  <div class="card-header" style="border-bottom: 1px solid #f0f0f0; color: #111;">
+    AI Order <span class="badge" style="background: #f5f5f5; color: #666;">New Order</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #f7f7f7; color: #333;">What would you like to order?</div>
+    <div class="card-msg user" style="background: #111; color: #fff;">1 teh c siu dai cold</div>
+    <div class="card-msg bot" style="background: #f7f7f7; color: #333;">
+      <div class="card-order-item"><span>1x Teh C</span><span>$3.80</span></div>
+      <div class="card-order-item detail"><span>siu dai, cold</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #f0f0f0;">
+    <input style="background: #f5f5f5; color: #111;" placeholder="Type your order...">
+    <button style="background: #111; color: #fff;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #111; color: #fff;">Create Order</div>
+</div>
+</div>
+
+<!-- 3. Ocean Blue -->
+<div>
+<div class="variant-label">03 &mdash; Ocean Blue</div>
+<div class="card card-chat" style="background: #0c1929; border: 1px solid #1a3050;">
+  <div class="card-header" style="border-bottom: 1px solid #1a3050; color: #e0f0ff;">
+    AI Order <span class="badge" style="background: #0a4d8c; color: #7ec8ff;">Active</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #112840; color: #8cb8d8;">What would you like to order?</div>
+    <div class="card-msg user" style="background: #0a6abf; color: #fff;">nasi lemak extra spicy with egg</div>
+    <div class="card-msg bot" style="background: #112840; color: #8cb8d8;">
+      <div class="card-order-item"><span>1x Nasi Lemak</span><span>$5.50</span></div>
+      <div class="card-order-item detail"><span>extra spicy, +egg</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #1a3050;">
+    <input style="background: #112840; color: #e0f0ff;" placeholder="Type your order...">
+    <button style="background: #0a6abf; color: #fff;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #0a6abf; color: #fff;">Create Order</div>
+</div>
+</div>
+
+<!-- 4. Warm Sand -->
+<div>
+<div class="variant-label">04 &mdash; Warm Sand</div>
+<div class="card card-chat" style="background: #faf6f0; border: 1px solid #e8ddd0; font-family: 'DM Sans', sans-serif;">
+  <div class="card-header" style="border-bottom: 1px solid #e8ddd0; color: #3d2e1c;">
+    AI Order <span class="badge" style="background: #e8ddd0; color: #8a6d4a;">Ordering</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #f0e8da; color: #5a4530; border-radius: 4px 16px 16px 16px;">What would you like?</div>
+    <div class="card-msg user" style="background: #3d2e1c; color: #faf6f0; border-radius: 16px 4px 16px 16px;">kopi gao kosong hot</div>
+    <div class="card-msg bot" style="background: #f0e8da; color: #5a4530; border-radius: 4px 16px 16px 16px;">
+      <div class="card-order-item"><span>1x Kopi Gao</span><span>$4.00</span></div>
+      <div class="card-order-item detail"><span>kosong, hot</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #e8ddd0;">
+    <input style="background: #f0e8da; color: #3d2e1c;" placeholder="Type your order...">
+    <button style="background: #3d2e1c; color: #faf6f0;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #3d2e1c; color: #faf6f0;">Create Order</div>
+</div>
+</div>
+
+<!-- 5. Neon Green -->
+<div>
+<div class="variant-label">05 &mdash; Neon Terminal</div>
+<div class="card card-chat" style="background: #0a0f0a; border: 1px solid #1a3a1a; font-family: 'Space Grotesk', monospace;">
+  <div class="card-header" style="border-bottom: 1px solid #1a3a1a; color: #4ade80;">
+    AI_ORDER <span class="badge" style="background: #0f1f0f; color: #4ade80; border: 1px solid #1a3a1a;">LIVE</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #0f1a0f; color: #4ade80; border: 1px solid #1a3a1a;">$ ready for order</div>
+    <div class="card-msg user" style="background: #4ade80; color: #0a0f0a;">1 boba 25% ice less pearl jelly</div>
+    <div class="card-msg bot" style="background: #0f1a0f; color: #4ade80; border: 1px solid #1a3a1a;">
+      <div class="card-order-item"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
+      <div class="card-order-item detail"><span>25% sugar, less ice, +pearl, +jelly</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #1a3a1a;">
+    <input style="background: #0f1a0f; color: #4ade80; border: 1px solid #1a3a1a;" placeholder="> order...">
+    <button style="background: #4ade80; color: #0a0f0a;">RUN</button>
+  </div>
+  <div class="card-btn" style="background: #4ade80; color: #0a0f0a;">EXECUTE ORDER</div>
+</div>
+</div>
+
+<!-- 6. Purple Gradient -->
+<div>
+<div class="variant-label">06 &mdash; Purple Glass</div>
+<div class="card card-chat" style="background: linear-gradient(135deg, #1a0a2e, #2d1b4e); border: 1px solid #3d2b5e;">
+  <div class="card-header" style="border-bottom: 1px solid #3d2b5e; color: #d4b8ff;">
+    AI Order <span class="badge" style="background: rgba(168,85,247,0.2); color: #a855f7;">New</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: rgba(255,255,255,0.05); color: #b89adb; backdrop-filter: blur(4px);">What can I get for you?</div>
+    <div class="card-msg user" style="background: #a855f7; color: #fff;">milo dinosaur tabao</div>
+    <div class="card-msg bot" style="background: rgba(255,255,255,0.05); color: #b89adb;">
+      <div class="card-order-item"><span>1x Milo Dinosaur</span><span>$4.20</span></div>
+      <div class="card-order-item detail"><span>takeaway</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #3d2b5e;">
+    <input style="background: rgba(255,255,255,0.06); color: #d4b8ff;" placeholder="Type your order...">
+    <button style="background: #a855f7; color: #fff;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #a855f7; color: #fff;">Create Order</div>
+</div>
+</div>
+
+<!-- 7. Coral Pink -->
+<div>
+<div class="variant-label">07 &mdash; Coral Pop</div>
+<div class="card card-chat" style="background: #fff5f5; border: 1px solid #fecaca; font-family: 'Outfit', sans-serif;">
+  <div class="card-header" style="border-bottom: 1px solid #fecaca; color: #991b1b;">
+    AI Order <span class="badge" style="background: #fee2e2; color: #dc2626;">Hot</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #fee2e2; color: #7f1d1d;">What's your order?</div>
+    <div class="card-msg user" style="background: #ef4444; color: #fff;">nasi lemak mild with chicken</div>
+    <div class="card-msg bot" style="background: #fee2e2; color: #7f1d1d;">
+      <div class="card-order-item"><span>1x Nasi Lemak</span><span>$5.50</span></div>
+      <div class="card-order-item detail"><span>mild, +chicken</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #fecaca;">
+    <input style="background: #fee2e2; color: #991b1b;" placeholder="Type your order...">
+    <button style="background: #ef4444; color: #fff;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #ef4444; color: #fff;">Create Order</div>
+</div>
+</div>
+
+<!-- 8. Slate Pro -->
+<div>
+<div class="variant-label">08 &mdash; Slate Pro</div>
+<div class="card card-chat" style="background: #1e293b; border: 1px solid #334155; font-family: 'Plus Jakarta Sans', sans-serif;">
+  <div class="card-header" style="border-bottom: 1px solid #334155; color: #e2e8f0;">
+    AI Order <span class="badge" style="background: #334155; color: #94a3b8;">v1.0</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #273548; color: #94a3b8;">Ready for your order.</div>
+    <div class="card-msg user" style="background: #3b82f6; color: #fff;">2 teh c kosong cold</div>
+    <div class="card-msg bot" style="background: #273548; color: #94a3b8;">
+      <div class="card-order-item"><span>2x Teh C</span><span>$7.60</span></div>
+      <div class="card-order-item detail"><span>kosong, cold</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #334155;">
+    <input style="background: #273548; color: #e2e8f0;" placeholder="Type your order...">
+    <button style="background: #3b82f6; color: #fff;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #3b82f6; color: #fff;">Create Order</div>
+</div>
+</div>
+
+<!-- 9. Emerald -->
+<div>
+<div class="variant-label">09 &mdash; Emerald</div>
+<div class="card card-chat" style="background: #022c22; border: 1px solid #064e3b;">
+  <div class="card-header" style="border-bottom: 1px solid #064e3b; color: #a7f3d0;">
+    AI Order <span class="badge" style="background: #064e3b; color: #34d399;">Ready</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #064e3b; color: #6ee7b7;">What would you like?</div>
+    <div class="card-msg user" style="background: #10b981; color: #fff;">boba 100% sugar normal ice pudding</div>
+    <div class="card-msg bot" style="background: #064e3b; color: #6ee7b7;">
+      <div class="card-order-item"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
+      <div class="card-order-item detail"><span>100% sugar, normal ice, +pudding</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #064e3b;">
+    <input style="background: #064e3b; color: #a7f3d0;" placeholder="Type your order...">
+    <button style="background: #10b981; color: #fff;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #10b981; color: #fff;">Create Order</div>
+</div>
+</div>
+
+<!-- 10. Amber Luxury -->
+<div>
+<div class="variant-label">10 &mdash; Amber Luxury</div>
+<div class="card card-chat" style="background: #1c1208; border: 1px solid #3d2a0a; font-family: 'DM Sans', sans-serif;">
+  <div class="card-header" style="border-bottom: 1px solid #3d2a0a; color: #fcd34d;">
+    AI Order <span class="badge" style="background: #3d2a0a; color: #f59e0b;">Premium</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #2a1c08; color: #d4a447;">Welcome. What would you like?</div>
+    <div class="card-msg user" style="background: #f59e0b; color: #1c1208;">kopi gao gah dai hot</div>
+    <div class="card-msg bot" style="background: #2a1c08; color: #d4a447;">
+      <div class="card-order-item"><span>1x Kopi Gao</span><span>$4.00</span></div>
+      <div class="card-order-item detail"><span>gah dai, hot</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #3d2a0a;">
+    <input style="background: #2a1c08; color: #fcd34d;" placeholder="Type your order...">
+    <button style="background: #f59e0b; color: #1c1208;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #f59e0b; color: #1c1208;">Create Order</div>
+</div>
+</div>
+
+<!-- 11. Rose Minimal -->
+<div>
+<div class="variant-label">11 &mdash; Rose Minimal</div>
+<div class="card card-chat" style="background: #fff1f2; border: 1px solid #ffe4e6; font-family: 'Outfit', sans-serif;">
+  <div class="card-header" style="border-bottom: 1px solid #ffe4e6; color: #881337;">
+    AI Order <span class="badge" style="background: #ffe4e6; color: #e11d48;">New</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #ffe4e6; color: #881337; border-radius: 4px 16px 16px 16px;">Hi! Ready to order?</div>
+    <div class="card-msg user" style="background: #e11d48; color: #fff; border-radius: 16px 4px 16px 16px;">1 nasi lemak normal otah egg</div>
+    <div class="card-msg bot" style="background: #ffe4e6; color: #881337; border-radius: 4px 16px 16px 16px;">
+      <div class="card-order-item"><span>1x Nasi Lemak</span><span>$5.50</span></div>
+      <div class="card-order-item detail"><span>normal, +otah, +egg</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #ffe4e6;">
+    <input style="background: #ffe4e6; color: #881337;" placeholder="Type your order...">
+    <button style="background: #e11d48; color: #fff;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #e11d48; color: #fff; border-radius: 20px;">Create Order</div>
+</div>
+</div>
+
+<!-- 12. Brutalist -->
+<div>
+<div class="variant-label">12 &mdash; Brutalist</div>
+<div class="card card-chat" style="background: #fff; border: 3px solid #000; border-radius: 0; font-family: 'Space Grotesk', sans-serif;">
+  <div class="card-header" style="border-bottom: 3px solid #000; color: #000; text-transform: uppercase; letter-spacing: 2px;">
+    ORDER <span class="badge" style="background: #000; color: #fff; border-radius: 0;">NEW</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #f0f0f0; color: #000; border: 2px solid #000; border-radius: 0;">WHAT DO YOU WANT?</div>
+    <div class="card-msg user" style="background: #000; color: #fff; border-radius: 0;">teh c siu dai hot</div>
+    <div class="card-msg bot" style="background: #f0f0f0; color: #000; border: 2px solid #000; border-radius: 0;">
+      <div class="card-order-item"><span>1x TEH C</span><span>$3.80</span></div>
+      <div class="card-order-item detail"><span>SIU DAI, HOT</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 3px solid #000;">
+    <input style="background: #f0f0f0; color: #000; border: 2px solid #000; border-radius: 0;" placeholder="ORDER...">
+    <button style="background: #000; color: #fff; border-radius: 0;">GO</button>
+  </div>
+  <div class="card-btn" style="background: #000; color: #fff; border-radius: 0; text-transform: uppercase; letter-spacing: 2px;">Create Order</div>
+</div>
+</div>
+
+<!-- 13. Glassmorphism -->
+<div>
+<div class="variant-label">13 &mdash; Glass</div>
+<div class="card card-chat" style="background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(10px);">
+  <div class="card-header" style="border-bottom: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.9);">
+    AI Order <span class="badge" style="background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5);">Order</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6);">What would you like?</div>
+    <div class="card-msg user" style="background: rgba(255,255,255,0.15); color: #fff;">boba 50% no ice pearl</div>
+    <div class="card-msg bot" style="background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6);">
+      <div class="card-order-item"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
+      <div class="card-order-item detail"><span>50% sugar, no ice, +pearl</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid rgba(255,255,255,0.08);">
+    <input style="background: rgba(255,255,255,0.06); color: #fff;" placeholder="Type your order...">
+    <button style="background: rgba(255,255,255,0.15); color: #fff;">Send</button>
+  </div>
+  <div class="card-btn" style="background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.15);">Create Order</div>
+</div>
+</div>
+
+<!-- 14. Teal Fresh -->
+<div>
+<div class="variant-label">14 &mdash; Teal Fresh</div>
+<div class="card card-chat" style="background: #f0fdfa; border: 1px solid #ccfbf1; font-family: 'Plus Jakarta Sans', sans-serif;">
+  <div class="card-header" style="border-bottom: 1px solid #ccfbf1; color: #134e4a;">
+    AI Order <span class="badge" style="background: #ccfbf1; color: #0d9488;">Active</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #ccfbf1; color: #115e59;">Ready for your order!</div>
+    <div class="card-msg user" style="background: #0d9488; color: #fff;">kopi gao normal cold</div>
+    <div class="card-msg bot" style="background: #ccfbf1; color: #115e59;">
+      <div class="card-order-item"><span>1x Kopi Gao</span><span>$4.00</span></div>
+      <div class="card-order-item detail"><span>normal sugar, cold</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #ccfbf1;">
+    <input style="background: #ccfbf1; color: #134e4a;" placeholder="Type your order...">
+    <button style="background: #0d9488; color: #fff;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #0d9488; color: #fff;">Create Order</div>
+</div>
+</div>
+
+<!-- 15. Indigo Deep -->
+<div>
+<div class="variant-label">15 &mdash; Indigo Deep</div>
+<div class="card card-chat" style="background: #1e1b4b; border: 1px solid #312e81;">
+  <div class="card-header" style="border-bottom: 1px solid #312e81; color: #c7d2fe;">
+    AI Order <span class="badge" style="background: #312e81; color: #818cf8;">New</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #312e81; color: #a5b4fc;">What can I get you?</div>
+    <div class="card-msg user" style="background: #6366f1; color: #fff;">2 boba 75% sugar less ice jelly</div>
+    <div class="card-msg bot" style="background: #312e81; color: #a5b4fc;">
+      <div class="card-order-item"><span>2x Brown Sugar Boba</span><span>$9.00</span></div>
+      <div class="card-order-item detail"><span>75% sugar, less ice, +jelly</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #312e81;">
+    <input style="background: #312e81; color: #c7d2fe;" placeholder="Type your order...">
+    <button style="background: #6366f1; color: #fff;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #6366f1; color: #fff;">Create Order</div>
+</div>
+</div>
+
+<!-- 16. Peach Soft -->
+<div>
+<div class="variant-label">16 &mdash; Peach Soft</div>
+<div class="card card-chat" style="background: #fff7ed; border: 1px solid #fed7aa; font-family: 'DM Sans', sans-serif;">
+  <div class="card-header" style="border-bottom: 1px solid #fed7aa; color: #7c2d12;">
+    AI Order <span class="badge" style="background: #fed7aa; color: #c2410c;">Order</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #ffedd5; color: #7c2d12; border-radius: 6px 18px 18px 18px;">Hi! What would you like?</div>
+    <div class="card-msg user" style="background: #ea580c; color: #fff; border-radius: 18px 6px 18px 18px;">nasi lemak normal chicken egg</div>
+    <div class="card-msg bot" style="background: #ffedd5; color: #7c2d12; border-radius: 6px 18px 18px 18px;">
+      <div class="card-order-item"><span>1x Nasi Lemak</span><span>$5.50</span></div>
+      <div class="card-order-item detail"><span>normal, +chicken, +egg</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #fed7aa;">
+    <input style="background: #ffedd5; color: #7c2d12;" placeholder="Type your order...">
+    <button style="background: #ea580c; color: #fff;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #ea580c; color: #fff;">Create Order</div>
+</div>
+</div>
+
+<!-- 17. Zinc Neutral -->
+<div>
+<div class="variant-label">17 &mdash; Zinc Neutral</div>
+<div class="card card-chat" style="background: #18181b; border: 1px solid #27272a; font-family: 'Inter', sans-serif;">
+  <div class="card-header" style="border-bottom: 1px solid #27272a; color: #d4d4d8;">
+    AI Order <span class="badge" style="background: #27272a; color: #71717a;">v1</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #27272a; color: #a1a1aa;">Order something.</div>
+    <div class="card-msg user" style="background: #52525b; color: #fafafa;">teh c normal hot</div>
+    <div class="card-msg bot" style="background: #27272a; color: #a1a1aa;">
+      <div class="card-order-item"><span>1x Teh C</span><span>$3.80</span></div>
+      <div class="card-order-item detail"><span>normal, hot</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #27272a;">
+    <input style="background: #27272a; color: #d4d4d8;" placeholder="Type your order...">
+    <button style="background: #d4d4d8; color: #18181b;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #d4d4d8; color: #18181b;">Create Order</div>
+</div>
+</div>
+
+<!-- 18. Sky Bright -->
+<div>
+<div class="variant-label">18 &mdash; Sky Bright</div>
+<div class="card card-chat" style="background: #f0f9ff; border: 1px solid #bae6fd; font-family: 'Outfit', sans-serif;">
+  <div class="card-header" style="border-bottom: 1px solid #bae6fd; color: #0c4a6e;">
+    AI Order <span class="badge" style="background: #bae6fd; color: #0284c7;">Open</span>
+  </div>
+  <div class="card-messages">
+    <div class="card-msg bot" style="background: #e0f2fe; color: #075985;">What are you having?</div>
+    <div class="card-msg user" style="background: #0284c7; color: #fff;">milo dinosaur here</div>
+    <div class="card-msg bot" style="background: #e0f2fe; color: #075985;">
+      <div class="card-order-item"><span>1x Milo Dinosaur</span><span>$4.20</span></div>
+      <div class="card-order-item detail"><span>dine in</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #bae6fd;">
+    <input style="background: #e0f2fe; color: #0c4a6e;" placeholder="Type your order...">
+    <button style="background: #0284c7; color: #fff;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #0284c7; color: #fff;">Create Order</div>
+</div>
+</div>
+
+<!-- 19. Charcoal Rounded -->
+<div>
+<div class="variant-label">19 &mdash; Charcoal Rounded</div>
+<div class="card card-chat" style="background: #262626; border: 1px solid #404040; border-radius: 24px; font-family: 'Plus Jakarta Sans', sans-serif;">
+  <div class="card-header" style="border-bottom: 1px solid #333; color: #e5e5e5; padding: 20px 24px;">
+    AI Order <span class="badge" style="background: #404040; color: #a3a3a3; border-radius: 12px;">Order</span>
+  </div>
+  <div class="card-messages" style="padding: 16px 20px;">
+    <div class="card-msg bot" style="background: #333; color: #a3a3a3; border-radius: 6px 20px 20px 20px;">Hey! What do you want?</div>
+    <div class="card-msg user" style="background: #f5f5f5; color: #171717; border-radius: 20px 6px 20px 20px;">boba 0% sugar no ice</div>
+    <div class="card-msg bot" style="background: #333; color: #a3a3a3; border-radius: 6px 20px 20px 20px;">
+      <div class="card-order-item"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
+      <div class="card-order-item detail"><span>0% sugar, no ice</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="border-top: 1px solid #333; padding: 16px 20px;">
+    <input style="background: #333; color: #e5e5e5; border-radius: 14px;" placeholder="Type your order...">
+    <button style="background: #f5f5f5; color: #171717; border-radius: 14px;">Send</button>
+  </div>
+  <div class="card-btn" style="background: #f5f5f5; color: #171717; border-radius: 14px; margin: 0 20px 16px;">Create Order</div>
+</div>
+</div>
+
+<!-- 20. WhatsApp -->
+<div>
+<div class="variant-label">20 &mdash; WhatsApp Native</div>
+<div class="card card-chat" style="background: #0b141a; border: 1px solid #222d34;">
+  <div class="card-header" style="background: #202c33; border-bottom: none; color: #e9edef;">
+    AI Order Bot <span class="badge" style="background: #00a884; color: #fff;">Online</span>
+  </div>
+  <div class="card-messages" style="background: #0b141a;">
+    <div class="card-msg bot" style="background: #202c33; color: #e9edef; border-radius: 0 8px 8px 8px;">Hello! Send me your order</div>
+    <div class="card-msg user" style="background: #005c4b; color: #e9edef; border-radius: 8px 0 8px 8px;">1 kopi gao kosong hot and 1 nasi lemak extra spicy</div>
+    <div class="card-msg bot" style="background: #202c33; color: #e9edef; border-radius: 0 8px 8px 8px;">
+      <div class="card-order-item"><span>1x Kopi Gao</span><span>$4.00</span></div>
+      <div class="card-order-item detail"><span>kosong, hot</span></div>
+      <div class="card-order-item" style="margin-top: 4px;"><span>1x Nasi Lemak</span><span>$5.50</span></div>
+      <div class="card-order-item detail"><span>extra spicy</span></div>
+      <div class="card-order-total" style="border-top: 1px solid #374045;"><span>Total</span><span>$9.50</span></div>
+    </div>
+  </div>
+  <div class="card-input" style="background: #202c33; border-top: none;">
+    <input style="background: #2a3942; color: #e9edef; border-radius: 20px;" placeholder="Type a message">
+    <button style="background: #00a884; color: #fff; border-radius: 50%; width: 40px; height: 40px; padding: 0;">&#x27A4;</button>
+  </div>
+  <div class="card-btn" style="background: #00a884; color: #fff;">Create Order</div>
+</div>
+</div>
+
+</div>
+
+</body>
+</html>
