@@ -3,201 +3,189 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Order - Sketch</title>
+<title>AI Order</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Courier New', monospace; background: #f5f5f0; color: #333; padding: 32px; }
-  h1 { text-align: center; font-size: 20px; margin-bottom: 8px; }
-  .subtitle { text-align: center; color: #888; font-size: 13px; margin-bottom: 24px; }
+  body { font-family: 'Inter', sans-serif; background: #18181b; color: #d4d4d8; padding: 32px; min-height: 100vh; }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 24px; }
+  .header h1 { font-size: 20px; font-weight: 600; color: #fafafa; letter-spacing: -0.3px; }
+  .header .subtitle { color: #52525b; font-size: 13px; margin-top: 4px; font-weight: 400; }
 
   /* Tabs */
-  .tabs { display: flex; gap: 0; margin-bottom: 0; }
+  .tabs { display: flex; gap: 4px; margin-bottom: 0; }
   .tab {
-    padding: 10px 24px; cursor: pointer; font-family: inherit; font-size: 14px;
-    border: 2px solid #333; border-bottom: none; background: #e8e8e0;
-    border-radius: 8px 8px 0 0; position: relative; top: 2px;
+    padding: 10px 20px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 500;
+    border: 1px solid #27272a; border-bottom: none; background: #27272a; color: #71717a;
+    border-radius: 10px 10px 0 0; position: relative; top: 1px; transition: all 0.15s;
   }
-  .tab.active { background: #fff; font-weight: bold; z-index: 1; }
-  .tab:not(.active):hover { background: #ddd; }
+  .tab.active { background: #d4d4d8; color: #18181b; font-weight: 600; z-index: 1; border-color: #d4d4d8; }
+  .tab:not(.active):hover { background: #3f3f46; color: #a1a1aa; }
 
   /* Main container */
   .container {
-    border: 2px solid #333; background: #fff; border-radius: 0 8px 8px 8px;
+    border: 1px solid #3f3f46; background: #27272a; border-radius: 0 12px 12px 12px;
     min-height: 520px; display: flex; gap: 0;
   }
 
-  /* Left panel - menu / existing order */
+  /* Left panel — code/data display */
   .left-panel {
-    width: 260px; border-right: 2px dashed #ccc; padding: 16px;
-    flex-shrink: 0;
+    width: 260px; border-right: 1px solid #3f3f46; padding: 16px;
+    flex-shrink: 0; background: #1f1f23; overflow-y: auto;
+    pointer-events: none; user-select: none;
   }
   .panel-title {
-    font-size: 12px; font-weight: bold; text-transform: uppercase;
-    color: #888; letter-spacing: 1px; margin-bottom: 12px;
-    border-bottom: 1px solid #ddd; padding-bottom: 6px;
+    font-size: 9px; font-weight: 600; text-transform: uppercase;
+    color: #a1a1aa; letter-spacing: 1.2px; margin-bottom: 12px;
+    border-bottom: 1px solid #3f3f46; padding-bottom: 8px;
   }
-
-  /* Menu items */
-  .menu-item {
-    padding: 8px; margin-bottom: 6px; border: 1px dashed #bbb;
-    border-radius: 4px; font-size: 12px; background: #fafaf5;
+  .data-block {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+    color: #71717a; line-height: 1.9; background: #27272a;
+    border-radius: 8px; padding: 12px; border: 1px solid #3f3f46;
   }
-  .menu-item .name { font-weight: bold; }
-  .menu-item .options { margin-top: 6px; }
-  .menu-item .option-group { margin-bottom: 4px; }
-  .menu-item .option-label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 0.5px; }
-  .menu-item .chips { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 2px; }
-  .menu-item .chip {
-    font-size: 10px; padding: 2px 6px; border-radius: 10px;
-    background: #eee; color: #555; border: 1px solid #ddd;
-  }
-  .menu-item .price { color: #666; font-size: 11px; float: right; }
+  .data-block .data-item { margin-bottom: 8px; }
+  .data-block .data-item:last-child { margin-bottom: 0; }
+  .data-block .data-name { color: #a1a1aa; }
+  .data-block .data-price { color: #52525b; }
+  .data-block .data-opt { padding-left: 14px; color: #52525b; }
+  .data-block .data-opt .data-vals { color: #71717a; }
 
   /* Chat area */
-  .chat-area { flex: 1; display: flex; flex-direction: column; }
+  .chat-area { flex: 1; display: flex; flex-direction: column; background: #27272a; }
   .chat-header {
-    font-size: 12px; font-weight: bold; text-transform: uppercase;
-    color: #888; letter-spacing: 1px; padding: 16px 16px 6px;
-    border-bottom: 1px solid #eee;
+    font-size: 9px; font-weight: 600; text-transform: uppercase;
+    color: #a1a1aa; letter-spacing: 1.2px; padding: 16px 16px 8px;
+    border-bottom: 1px solid #3f3f46;
   }
-  .messages { flex: 1; padding: 12px 16px; overflow-y: auto; }
+  .messages { flex: 1; padding: 14px 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
   .msg {
-    margin-bottom: 10px; padding: 8px 12px; border-radius: 8px;
-    font-size: 12px; max-width: 80%; line-height: 1.5;
+    padding: 10px 14px; border-radius: 12px;
+    font-size: 12px; max-width: 80%; line-height: 1.6;
   }
-  .msg.user { background: #e3f2fd; margin-left: auto; text-align: right; }
-  .msg.bot { background: #f0f0e8; border: 1px solid #ddd; }
-  .msg .label { font-size: 10px; color: #999; margin-bottom: 2px; }
+  .msg.user { background: #52525b; color: #fafafa; align-self: flex-end; }
+  .msg.bot { background: #3f3f46; color: #d4d4d8; align-self: flex-start; }
+  .msg .label { font-size: 9px; color: #71717a; margin-bottom: 3px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+  .msg.user .label { color: #a1a1aa; }
 
   /* Input */
   .chat-input {
-    border-top: 2px solid #333; padding: 12px; display: flex; gap: 8px;
+    border-top: 1px solid #3f3f46; padding: 12px; display: flex; gap: 8px;
   }
   .chat-input input {
-    flex: 1; padding: 8px; border: 1px dashed #999; border-radius: 4px;
-    font-family: inherit; font-size: 12px; background: #fafaf5;
+    flex: 1; padding: 10px 14px; border: none; border-radius: 8px;
+    font-family: inherit; font-size: 12px; background: #3f3f46; color: #e4e4e7;
+    outline: none;
   }
+  .chat-input input::placeholder { color: #52525b; }
   .chat-input button {
-    padding: 8px 16px; border: 2px solid #333; background: #333;
-    color: #fff; font-family: inherit; font-size: 12px; border-radius: 4px;
-    cursor: pointer;
+    padding: 10px 18px; border: none; background: #d4d4d8;
+    color: #18181b; font-family: inherit; font-size: 12px; font-weight: 600;
+    border-radius: 8px; cursor: pointer; transition: background 0.15s;
   }
+  .chat-input button:hover { background: #e4e4e7; }
 
-  /* Right panel - formatted order */
+  /* Right panel */
   .right-panel {
-    width: 260px; border-left: 2px dashed #ccc; padding: 16px;
-    flex-shrink: 0; background: #fafaf5;
+    width: 260px; border-left: 1px solid #3f3f46; padding: 16px;
+    flex-shrink: 0; background: #27272a; overflow-y: auto;
   }
 
   /* Order output */
   .order-box {
-    border: 2px solid #333; border-radius: 6px; padding: 12px;
-    font-size: 11px; line-height: 1.6; background: #fff;
+    border-radius: 8px; padding: 12px;
+    font-size: 11px; line-height: 1.7; background: #3f3f46; color: #d4d4d8;
   }
-  .order-box .order-title { font-weight: bold; font-size: 13px; margin-bottom: 8px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+  .order-box .order-title { font-weight: 700; font-size: 12px; color: #fafafa; margin-bottom: 8px; border-bottom: 1px solid #52525b; padding-bottom: 6px; }
   .order-line { display: flex; justify-content: space-between; }
-  .order-line .detail { color: #888; font-size: 10px; padding-left: 12px; }
-  .order-total { border-top: 2px solid #333; margin-top: 8px; padding-top: 6px; font-weight: bold; display: flex; justify-content: space-between; }
-  .order-status { margin-top: 12px; padding: 6px 8px; background: #e8f5e9; border-radius: 4px; font-size: 11px; text-align: center; }
-
-  /* SO display */
-  .so-item {
-    padding: 8px; margin-bottom: 6px; border: 1px solid #bbb;
-    border-radius: 4px; font-size: 12px; background: #fff;
+  .order-line .detail { color: #a1a1aa; font-size: 10px; padding-left: 12px; }
+  .order-opts { padding-left: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; line-height: 1.8; }
+  .order-opts .opt-key { color: #a1a1aa; }
+  .order-opts .opt-val { color: #d4d4d8; }
+  .order-total { border-top: 1px solid #52525b; margin-top: 8px; padding-top: 6px; font-weight: 700; display: flex; justify-content: space-between; color: #fafafa; }
+  .order-status {
+    margin-top: 12px; padding: 8px; background: #d4d4d8; color: #18181b;
+    border-radius: 8px; font-size: 12px; text-align: center; font-weight: 600;
+    cursor: pointer; border: none; width: 100%; transition: background 0.15s;
   }
-  .so-item .qty { font-weight: bold; }
-  .so-item .detail { color: #888; font-size: 11px; margin-top: 2px; }
-  .so-id { font-weight: bold; font-size: 13px; margin-bottom: 8px; padding: 6px 8px; background: #e3f2fd; border-radius: 4px; }
+  .order-status:hover { background: #e4e4e7; }
+  .order-status.clicked { background: #4ade80; color: #052e16; }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: #d4d4d8; color: #18181b; padding: 10px 24px; border-radius: 8px;
+    font-size: 12px; font-weight: 500; opacity: 0; transition: all 0.3s; z-index: 100;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Typing indicator */
+  .msg.typing .dots span {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: #52525b; margin: 0 2px; animation: blink 1.2s infinite;
+  }
+  .msg.typing .dots span:nth-child(2) { animation-delay: 0.2s; }
+  .msg.typing .dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink { 0%, 60%, 100% { opacity: 0.3; } 30% { opacity: 1; } }
+
 
   .hidden { display: none; }
 
-  /* Sketch annotation */
+  /* Annotation */
   .annotation {
-    font-size: 10px; color: #c44; font-style: italic;
-    margin-top: 8px; padding: 4px 6px; border-left: 2px solid #c44;
+    font-size: 10px; color: #3f3f46; font-style: italic;
+    margin-top: 10px; padding: 4px 6px; border-left: 2px solid #3f3f46;
   }
 
-  /* Arrows */
-  .flow-arrow { text-align: center; color: #888; font-size: 20px; padding: 4px 0; }
+  .flow-arrow { text-align: center; color: #3f3f46; font-size: 16px; padding: 8px 0; }
 </style>
 </head>
 <body>
 
-<h1>AI Order - Demo Sketch</h1>
-<p class="subtitle">WhatsApp Food Ordering Bot &middot; v1 wireframe</p>
+<div class="header">
+  <h1>AI Order</h1>
+  <p class="subtitle">WhatsApp Food Ordering Bot</p>
+</div>
 
 <!-- Tabs -->
 <div class="tabs">
-  <div class="tab active" onclick="showTab('place')">&#x1f4e6; Place Order</div>
-  <div class="tab" onclick="showTab('edit')">&#x270f;&#xfe0f; Edit Order</div>
+  <div class="tab active" onclick="showTab('place')">Place Order</div>
+  <div class="tab" onclick="showTab('edit')">Edit Order</div>
 </div>
 
 <!-- TAB 1: Place Order -->
 <div class="container" id="tab-place">
-  <!-- Left: Menu -->
+  <!-- Left: Menu (data display) -->
   <div class="left-panel">
     <div class="panel-title">Menu Items</div>
-    <div class="menu-item">
-      <span class="price">$4.50</span>
-      <div class="name">Brown Sugar Boba</div>
-      <div class="options">
-        <div class="option-group">
-          <div class="option-label">Sugar</div>
-          <div class="chips"><span class="chip">0%</span><span class="chip">25%</span><span class="chip">50%</span><span class="chip">75%</span><span class="chip">100%</span></div>
-        </div>
-        <div class="option-group">
-          <div class="option-label">Ice</div>
-          <div class="chips"><span class="chip">none</span><span class="chip">less</span><span class="chip">normal</span></div>
-        </div>
-        <div class="option-group">
-          <div class="option-label">Toppings +$0.50</div>
-          <div class="chips"><span class="chip">pearl</span><span class="chip">jelly</span><span class="chip">pudding</span></div>
-        </div>
+    <div class="data-block">
+      <div class="data-item">
+        <span class="data-name">Brown Sugar Boba</span> <span class="data-price">$4.50</span>
+        <div class="data-opt">sugar: <span class="data-vals">0% | 25% | 50% | 75% | 100%</span></div>
+        <div class="data-opt">ice: <span class="data-vals">none | less | normal</span></div>
+        <div class="data-opt">toppings +$0.50: <span class="data-vals">pearl | jelly | pudding</span></div>
+      </div>
+      <div class="data-item">
+        <span class="data-name">Teh C</span> <span class="data-price">$3.80</span>
+        <div class="data-opt">sugar: <span class="data-vals">kosong | siu dai | normal</span></div>
+        <div class="data-opt">temp: <span class="data-vals">hot | cold</span></div>
+      </div>
+      <div class="data-item">
+        <span class="data-name">Nasi Lemak</span> <span class="data-price">$5.50</span>
+        <div class="data-opt">spice: <span class="data-vals">mild | normal | extra</span></div>
+        <div class="data-opt">add-on +$0.50: <span class="data-vals">egg | otah | chicken</span></div>
+      </div>
+      <div class="data-item">
+        <span class="data-name">Kopi Gao</span> <span class="data-price">$4.00</span>
+        <div class="data-opt">sugar: <span class="data-vals">kosong | normal | gah dai</span></div>
+        <div class="data-opt">temp: <span class="data-vals">hot | cold</span></div>
       </div>
     </div>
-    <div class="menu-item">
-      <span class="price">$3.80</span>
-      <div class="name">Teh C</div>
-      <div class="options">
-        <div class="option-group">
-          <div class="option-label">Sugar</div>
-          <div class="chips"><span class="chip">kosong</span><span class="chip">siu dai</span><span class="chip">normal</span></div>
-        </div>
-        <div class="option-group">
-          <div class="option-label">Temp</div>
-          <div class="chips"><span class="chip">hot</span><span class="chip">cold</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="menu-item">
-      <span class="price">$5.50</span>
-      <div class="name">Nasi Lemak</div>
-      <div class="options">
-        <div class="option-group">
-          <div class="option-label">Spice</div>
-          <div class="chips"><span class="chip">mild</span><span class="chip">normal</span><span class="chip">extra</span></div>
-        </div>
-        <div class="option-group">
-          <div class="option-label">Add-on +$0.50</div>
-          <div class="chips"><span class="chip">egg</span><span class="chip">otah</span><span class="chip">chicken</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="menu-item">
-      <span class="price">$4.00</span>
-      <div class="name">Kopi Gao</div>
-      <div class="options">
-        <div class="option-group">
-          <div class="option-label">Sugar</div>
-          <div class="chips"><span class="chip">kosong</span><span class="chip">normal</span><span class="chip">gah dai</span></div>
-        </div>
-        <div class="option-group">
-          <div class="option-label">Temp</div>
-          <div class="chips"><span class="chip">hot</span><span class="chip">cold</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="annotation">Hardcoded JSON menu with options</div>
+
   </div>
 
   <!-- Center: Chat -->
@@ -221,7 +209,7 @@
       <input type="text" placeholder="Type your order in natural language...">
       <button>Send</button>
     </div>
-    <div class="annotation">LLM parses natural language → structured order JSON</div>
+
   </div>
 
   <!-- Right: Formatted Order -->
@@ -230,38 +218,47 @@
     <div class="order-box">
       <div class="order-title">Order #1042</div>
       <div class="order-line"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
-      <div class="order-line"><span class="detail">50% sugar, no ice</span></div>
-      <div class="order-line"><span class="detail">+ pearl ($0.50)</span></div>
-      <br>
+      <div class="order-opts">
+        <div><span class="opt-key">sugar:</span> <span class="opt-val">50%</span></div>
+        <div><span class="opt-key">ice:</span> <span class="opt-val">none</span></div>
+        <div><span class="opt-key">topping:</span> <span class="opt-val">pearl ($0.50)</span></div>
+      </div>
+      <div style="height:6px;"></div>
       <div class="order-line"><span>1x Nasi Lemak</span><span>$5.50</span></div>
-      <div class="order-line"><span class="detail">extra spicy</span></div>
-      <div class="order-line"><span class="detail">+ egg ($0.50)</span></div>
+      <div class="order-opts">
+        <div><span class="opt-key">spice:</span> <span class="opt-val">extra</span></div>
+        <div><span class="opt-key">add-on:</span> <span class="opt-val">egg ($0.50)</span></div>
+      </div>
       <div class="order-total"><span>TOTAL</span><span>$11.00</span></div>
-      <div class="order-status" style="cursor: pointer; background: #333; color: #fff; font-weight: bold;">Create Order</div>
     </div>
-    <div class="annotation">Clean output ready to send to backend / POS</div>
+    <div class="order-status">Create Order</div>
   </div>
 </div>
 
 <!-- TAB 2: Edit Order -->
 <div class="container hidden" id="tab-edit">
-  <!-- Left: Existing SO -->
+  <!-- Left: Existing SO (data display) -->
   <div class="left-panel">
     <div class="panel-title">Existing Order</div>
-    <div class="so-id">SO-2024-0587</div>
-    <div class="so-item">
-      <span class="qty">1x</span> Brown Sugar Boba
-      <div class="detail">50% sugar, no ice, + pearl</div>
+    <div class="data-block">
+      <div style="color:#a1a1aa; margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid #3f3f46;">SO-2024-0587</div>
+      <div class="data-item">
+        <span class="data-vals">1x</span> <span class="data-name">Brown Sugar Boba</span>
+        <div class="data-opt"><span style="color:#52525b;">sugar:</span> <span class="data-vals">50%</span></div>
+        <div class="data-opt"><span style="color:#52525b;">ice:</span> <span class="data-vals">none</span></div>
+        <div class="data-opt"><span style="color:#52525b;">topping:</span> <span class="data-vals">pearl</span></div>
+      </div>
+      <div class="data-item">
+        <span class="data-vals">1x</span> <span class="data-name">Nasi Lemak</span>
+        <div class="data-opt"><span style="color:#52525b;">spice:</span> <span class="data-vals">extra</span></div>
+        <div class="data-opt"><span style="color:#52525b;">add-on:</span> <span class="data-vals">egg</span></div>
+      </div>
+      <div class="data-item">
+        <span class="data-vals">2x</span> <span class="data-name">Teh C</span>
+        <div class="data-opt"><span style="color:#52525b;">sugar:</span> <span class="data-vals">siu dai</span></div>
+        <div class="data-opt"><span style="color:#52525b;">temp:</span> <span class="data-vals">cold</span></div>
+      </div>
     </div>
-    <div class="so-item">
-      <span class="qty">1x</span> Nasi Lemak
-      <div class="detail">extra spicy, + egg</div>
-    </div>
-    <div class="so-item">
-      <span class="qty">2x</span> Teh C
-      <div class="detail">siu dai, cold</div>
-    </div>
-    <div class="annotation">Hardcoded existing SO as JSON</div>
   </div>
 
   <!-- Center: Chat -->
@@ -279,7 +276,7 @@
       <div class="msg bot">
         <div class="label">Bot</div>
         Done! Here's what changed:<br><br>
-        &#x270f;&#xfe0f; Brown Sugar Boba → 25% sugar (was 50%)<br>
+        &#x270f;&#xfe0f; Brown Sugar Boba &#x2192; 25% sugar (was 50%)<br>
         &#x274c; Nasi Lemak removed<br><br>
         See updated order on the right. &#x2192;
       </div>
@@ -288,44 +285,60 @@
       <input type="text" placeholder="Tell me what to change...">
       <button>Send</button>
     </div>
-    <div class="annotation">LLM reads existing SO + user request → outputs diff + updated order</div>
   </div>
 
   <!-- Right: Before & After -->
   <div class="right-panel">
     <div class="panel-title">Before</div>
-    <div class="order-box" style="opacity: 0.6;">
+    <div class="order-box" style="opacity: 0.5;">
       <div class="order-title">SO-2024-0587</div>
       <div class="order-line"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
-      <div class="order-line"><span class="detail">50% sugar, no ice</span></div>
-      <div class="order-line"><span class="detail">+ pearl ($0.50)</span></div>
-      <br>
+      <div class="order-opts">
+        <div><span class="opt-key">sugar:</span> <span class="opt-val">50%</span></div>
+        <div><span class="opt-key">ice:</span> <span class="opt-val">none</span></div>
+        <div><span class="opt-key">topping:</span> <span class="opt-val">pearl ($0.50)</span></div>
+      </div>
+      <div style="height:6px;"></div>
       <div class="order-line"><span>1x Nasi Lemak</span><span>$5.50</span></div>
-      <div class="order-line"><span class="detail">extra spicy, + egg ($0.50)</span></div>
-      <br>
+      <div class="order-opts">
+        <div><span class="opt-key">spice:</span> <span class="opt-val">extra</span></div>
+        <div><span class="opt-key">add-on:</span> <span class="opt-val">egg ($0.50)</span></div>
+      </div>
+      <div style="height:6px;"></div>
       <div class="order-line"><span>2x Teh C</span><span>$7.60</span></div>
-      <div class="order-line"><span class="detail">siu dai, cold</span></div>
+      <div class="order-opts">
+        <div><span class="opt-key">sugar:</span> <span class="opt-val">siu dai</span></div>
+        <div><span class="opt-key">temp:</span> <span class="opt-val">cold</span></div>
+      </div>
       <div class="order-total"><span>TOTAL</span><span>$18.60</span></div>
     </div>
 
-    <div style="text-align: center; color: #888; font-size: 16px; padding: 8px 0;">&#x2193;</div>
+    <div class="flow-arrow">&#x2193;</div>
 
     <div class="panel-title">After</div>
     <div class="order-box">
       <div class="order-title">SO-2024-0587 (edited)</div>
       <div class="order-line"><span>1x Brown Sugar Boba</span><span>$4.50</span></div>
-      <div class="order-line"><span class="detail">25% sugar, no ice &#x270f;&#xfe0f;</span></div>
-      <div class="order-line"><span class="detail">+ pearl ($0.50)</span></div>
-      <br>
-      <div class="order-line" style="text-decoration: line-through; color: #999;"><span>1x Nasi Lemak</span><span>$5.50</span></div>
-      <br>
+      <div class="order-opts">
+        <div><span class="opt-key">sugar:</span> <span class="opt-val">25%</span> <span style="color:#52525b; font-size:8px;">&#x270f;&#xfe0f;</span></div>
+        <div><span class="opt-key">ice:</span> <span class="opt-val">none</span></div>
+        <div><span class="opt-key">topping:</span> <span class="opt-val">pearl ($0.50)</span></div>
+      </div>
+      <div style="height:6px;"></div>
+      <div class="order-line" style="text-decoration: line-through; color: #3f3f46;"><span>1x Nasi Lemak</span><span>$5.50</span></div>
+      <div style="height:6px;"></div>
       <div class="order-line"><span>2x Teh C</span><span>$7.60</span></div>
-      <div class="order-line"><span class="detail">siu dai, cold</span></div>
+      <div class="order-opts">
+        <div><span class="opt-key">sugar:</span> <span class="opt-val">siu dai</span></div>
+        <div><span class="opt-key">temp:</span> <span class="opt-val">cold</span></div>
+      </div>
       <div class="order-total"><span>TOTAL</span><span>$12.60</span></div>
-      <div class="order-status" style="cursor: pointer; background: #333; color: #fff; font-weight: bold;">Edit Order</div>
     </div>
+    <div class="order-status">Edit Order</div>
   </div>
 </div>
+
+<div class="toast" id="toast"></div>
 
 <script>
 function showTab(tab) {
@@ -340,6 +353,82 @@ function showTab(tab) {
     document.getElementById('tab-edit').classList.remove('hidden');
   }
 }
+
+// Toast
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+// Fake bot replies
+const botReplies = [
+  "Got it! I've added that to your order.",
+  "Sure thing! Anything else you'd like?",
+  "Updated! Check the order on the right.",
+  "No problem. I've made that change.",
+  "Done! Your order has been updated.",
+];
+
+function sendMessage(container) {
+  const input = container.querySelector('.chat-input input');
+  const messages = container.querySelector('.messages');
+  const text = input.value.trim();
+  if (!text) return;
+
+  // Add user message
+  const userMsg = document.createElement('div');
+  userMsg.className = 'msg user';
+  userMsg.innerHTML = '<div class="label">You</div>' + text;
+  messages.appendChild(userMsg);
+  input.value = '';
+  messages.scrollTop = messages.scrollHeight;
+
+  // Show typing indicator
+  const typing = document.createElement('div');
+  typing.className = 'msg bot typing';
+  typing.innerHTML = '<div class="dots"><span></span><span></span><span></span></div>';
+  messages.appendChild(typing);
+  messages.scrollTop = messages.scrollHeight;
+
+  // Bot reply after delay
+  setTimeout(() => {
+    typing.remove();
+    const botMsg = document.createElement('div');
+    botMsg.className = 'msg bot';
+    const reply = botReplies[Math.floor(Math.random() * botReplies.length)];
+    botMsg.innerHTML = '<div class="label">Bot</div>' + reply;
+    messages.appendChild(botMsg);
+    messages.scrollTop = messages.scrollHeight;
+  }, 800 + Math.random() * 600);
+}
+
+// Send button clicks
+document.querySelectorAll('.chat-input button').forEach(btn => {
+  btn.addEventListener('click', () => sendMessage(btn.closest('.container')));
+});
+
+// Enter key
+document.querySelectorAll('.chat-input input').forEach(input => {
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') sendMessage(input.closest('.container'));
+  });
+});
+
+// Order buttons
+document.querySelectorAll('.order-status').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const label = btn.textContent;
+    btn.classList.add('clicked');
+    btn.textContent = 'Sent!';
+    showToast(label === 'Create Order' ? 'Order created successfully' : 'Order updated successfully');
+    setTimeout(() => {
+      btn.classList.remove('clicked');
+      btn.textContent = label;
+    }, 2000);
+  });
+});
 </script>
 
 </body>
