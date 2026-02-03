@@ -3,211 +3,244 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Order</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>AI Order - Sketch</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; }
-  body { font-family: 'Inter', sans-serif; background: #18181b; color: #d4d4d8; padding: 32px; min-height: 100vh; display: flex; flex-direction: column; }
-
-  /* Header */
-  .header { text-align: center; margin-bottom: 24px; }
-  .header h1 { font-size: 20px; font-weight: 600; color: #fafafa; letter-spacing: -0.3px; }
-  .header .subtitle { color: #52525b; font-size: 13px; margin-top: 4px; font-weight: 400; }
+  body { font-family: 'Courier New', monospace; background: #f5f5f0; color: #333; padding: 32px; }
+  h1 { text-align: center; font-size: 20px; margin-bottom: 8px; }
+  .subtitle { text-align: center; color: #888; font-size: 13px; margin-bottom: 24px; }
 
   /* Tabs */
-  .tabs { display: flex; gap: 4px; margin-bottom: 0; }
+  .tabs { display: flex; gap: 0; margin-bottom: 0; }
   .tab {
-    padding: 10px 20px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 500;
-    border: 1px solid #27272a; border-bottom: none; background: #27272a; color: #71717a;
-    border-radius: 10px 10px 0 0; position: relative; top: 1px; transition: all 0.15s;
+    padding: 10px 24px; cursor: pointer; font-family: inherit; font-size: 14px;
+    border: 2px solid #333; border-bottom: none; background: #e8e8e0;
+    border-radius: 8px 8px 0 0; position: relative; top: 2px;
   }
-  .tab.active { background: #d4d4d8; color: #18181b; font-weight: 600; z-index: 1; border-color: #d4d4d8; }
-  .tab:not(.active):hover { background: #3f3f46; color: #a1a1aa; }
+  .tab.active { background: #fff; font-weight: bold; z-index: 1; }
+  .tab:not(.active):hover { background: #ddd; }
 
   /* Main container */
   .container {
-    border: 1px solid #3f3f46; background: #27272a; border-radius: 0 12px 12px 12px;
-    flex: 1; display: flex; gap: 0; min-height: 0;
+    border: 2px solid #333; background: #fff; border-radius: 0 8px 8px 8px;
+    min-height: 520px; display: flex; gap: 0;
   }
 
-  /* Left panel — code/data display */
+  /* Left panel - menu / existing order */
   .left-panel {
-    width: 260px; border-right: 1px solid #3f3f46; padding: 16px;
-    flex-shrink: 0; background: #1f1f23; overflow-y: auto;
-    pointer-events: none; user-select: none;
+    width: 260px; border-right: 2px dashed #ccc; padding: 16px;
+    flex-shrink: 0;
   }
   .panel-title {
-    font-size: 9px; font-weight: 600; text-transform: uppercase;
-    color: #a1a1aa; letter-spacing: 1.2px; margin-bottom: 12px;
-    border-bottom: 1px solid #3f3f46; padding-bottom: 8px;
+    font-size: 12px; font-weight: bold; text-transform: uppercase;
+    color: #888; letter-spacing: 1px; margin-bottom: 12px;
+    border-bottom: 1px solid #ddd; padding-bottom: 6px;
   }
-  .data-block {
-    font-family: 'IBM Plex Mono', monospace; font-size: 10px;
-    color: #71717a; line-height: 1.9; background: #27272a;
-    border-radius: 8px; padding: 12px; border: 1px solid #3f3f46;
+
+  /* Menu items */
+  .menu-item {
+    padding: 8px; margin-bottom: 6px; border: 1px dashed #bbb;
+    border-radius: 4px; font-size: 12px; background: #fafaf5;
   }
-  .data-block .data-item { margin-bottom: 8px; }
-  .data-block .data-item:last-child { margin-bottom: 0; }
-  .data-block .data-name { color: #a1a1aa; }
-  .data-block .data-price { color: #52525b; }
-  .data-block .data-opt { padding-left: 14px; color: #a1a1aa; }
-  .data-block .data-opt .data-vals { color: #d4d4d8; }
+  .menu-item .name { font-weight: bold; }
+  .menu-item .options { margin-top: 6px; }
+  .menu-item .option-group { margin-bottom: 4px; }
+  .menu-item .option-label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 0.5px; }
+  .menu-item .chips { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 2px; }
+  .menu-item .chip {
+    font-size: 10px; padding: 2px 6px; border-radius: 10px;
+    background: #eee; color: #555; border: 1px solid #ddd;
+  }
+  .menu-item .price { color: #666; font-size: 11px; float: right; }
 
   /* Chat area */
-  .chat-area { flex: 1; display: flex; flex-direction: column; background: #27272a; }
+  .chat-area { flex: 1; display: flex; flex-direction: column; }
   .chat-header {
-    font-size: 9px; font-weight: 600; text-transform: uppercase;
-    color: #a1a1aa; letter-spacing: 1.2px; padding: 16px 16px 8px;
-    border-bottom: 1px solid #3f3f46;
+    font-size: 12px; font-weight: bold; text-transform: uppercase;
+    color: #888; letter-spacing: 1px; padding: 16px 16px 6px;
+    border-bottom: 1px solid #eee;
   }
-  .messages { flex: 1; padding: 14px 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+  .messages { flex: 1; padding: 12px 16px; overflow-y: auto; }
   .msg {
-    padding: 10px 14px; border-radius: 12px;
-    font-size: 12px; max-width: 80%; line-height: 1.6;
+    margin-bottom: 10px; padding: 8px 12px; border-radius: 8px;
+    font-size: 12px; max-width: 80%; line-height: 1.5;
   }
-  .msg.user { background: #52525b; color: #fafafa; align-self: flex-end; }
-  .msg.bot { background: #3f3f46; color: #d4d4d8; align-self: flex-start; }
-  .msg .label { font-size: 9px; color: #71717a; margin-bottom: 3px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-  .msg.user .label { color: #a1a1aa; }
+  .msg.user { background: #e3f2fd; margin-left: auto; text-align: right; }
+  .msg.bot { background: #f0f0e8; border: 1px solid #ddd; }
+  .msg .label { font-size: 10px; color: #999; margin-bottom: 2px; }
 
   /* Input */
   .chat-input {
-    border-top: 1px solid #3f3f46; padding: 12px; display: flex; gap: 8px;
+    border-top: 2px solid #333; padding: 12px; display: flex; gap: 8px;
   }
   .chat-input input {
-    flex: 1; padding: 10px 14px; border: none; border-radius: 8px;
-    font-family: inherit; font-size: 12px; background: #3f3f46; color: #e4e4e7;
-    outline: none;
+    flex: 1; padding: 8px; border: 1px dashed #999; border-radius: 4px;
+    font-family: inherit; font-size: 12px; background: #fafaf5;
   }
-  .chat-input input::placeholder { color: #52525b; }
   .chat-input button {
-    padding: 10px 18px; border: none; background: #d4d4d8;
-    color: #18181b; font-family: inherit; font-size: 12px; font-weight: 600;
-    border-radius: 8px; cursor: pointer; transition: background 0.15s;
+    padding: 8px 16px; border: 2px solid #333; background: #333;
+    color: #fff; font-family: inherit; font-size: 12px; border-radius: 4px;
+    cursor: pointer;
   }
-  .chat-input button:hover { background: #e4e4e7; }
   .chat-input button:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  /* Right panel */
+  /* Right panel - formatted order */
   .right-panel {
-    width: 260px; border-left: 1px solid #3f3f46; padding: 16px;
-    flex-shrink: 0; background: #27272a; overflow-y: auto;
-    display: flex; flex-direction: column;
+    width: 260px; border-left: 2px dashed #ccc; padding: 16px;
+    flex-shrink: 0; background: #fafaf5;
   }
 
   /* Order output */
   .order-box {
-    border-radius: 8px; padding: 12px;
-    font-size: 11px; line-height: 1.4; background: #3f3f46; color: #d4d4d8;
+    border: 2px solid #333; border-radius: 6px; padding: 12px;
+    font-size: 11px; line-height: 1.6; background: #fff;
   }
-  .order-box .order-title { font-weight: 700; font-size: 12px; color: #fafafa; margin-bottom: 6px; border-bottom: 1px solid #52525b; padding-bottom: 6px; }
+  .order-box .order-title { font-weight: bold; font-size: 13px; margin-bottom: 8px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
   .order-line { display: flex; justify-content: space-between; }
-  .order-line .detail { color: #a1a1aa; font-size: 10px; padding-left: 12px; }
-  .order-opts { padding-left: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; line-height: 1.8; }
-  .order-opts .opt-key { color: #a1a1aa; }
-  .order-opts .opt-val { color: #d4d4d8; }
-  .order-total { border-top: 1px solid #52525b; margin-top: 6px; padding-top: 6px; font-weight: 700; display: flex; justify-content: space-between; color: #fafafa; }
+  .order-line .detail { color: #888; font-size: 10px; padding-left: 12px; }
+  .order-opts { padding-left: 12px; font-size: 10px; line-height: 1.8; }
+  .order-opts .opt-key { color: #999; }
+  .order-opts .opt-val { color: #333; }
+  .order-total { border-top: 2px solid #333; margin-top: 8px; padding-top: 6px; font-weight: bold; display: flex; justify-content: space-between; }
   .order-status {
-    margin-top: 12px; padding: 8px; background: #d4d4d8; color: #18181b;
-    border-radius: 8px; font-size: 12px; text-align: center; font-weight: 600;
-    cursor: pointer; border: none; width: 100%; transition: background 0.15s;
+    margin-top: 12px; padding: 6px 8px; background: #333; color: #fff;
+    border-radius: 4px; font-size: 11px; text-align: center; font-weight: bold;
+    cursor: pointer; border: 2px solid #333; width: 100; font-family: inherit;
   }
-  .order-status:hover { background: #e4e4e7; }
-  .order-status.clicked { background: #4ade80; color: #052e16; }
+  .order-status:hover { background: #555; }
+  .order-status.clicked { background: #4caf50; border-color: #4caf50; }
+
+  /* SO display */
+  .so-item {
+    padding: 8px; margin-bottom: 6px; border: 1px solid #bbb;
+    border-radius: 4px; font-size: 12px; background: #fff;
+  }
+  .so-item .qty { font-weight: bold; }
+  .so-item .detail { color: #888; font-size: 11px; margin-top: 2px; }
+  .so-id { font-weight: bold; font-size: 13px; margin-bottom: 8px; padding: 6px 8px; background: #e3f2fd; border-radius: 4px; }
+
+  .hidden { display: none; }
+
+  /* Arrows */
+  .flow-arrow { text-align: center; color: #888; font-size: 20px; padding: 4px 0; }
 
   /* Toast */
   .toast {
     position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
-    background: #d4d4d8; color: #18181b; padding: 10px 24px; border-radius: 8px;
-    font-size: 12px; font-weight: 500; opacity: 0; transition: all 0.3s; z-index: 100;
-    pointer-events: none;
+    background: #333; color: #fff; padding: 10px 24px; border-radius: 4px;
+    font-family: 'Courier New', monospace; font-size: 12px; font-weight: bold;
+    opacity: 0; transition: all 0.3s; z-index: 100; pointer-events: none;
+    border: 2px solid #333;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   /* Typing indicator */
   .msg.typing .dots span {
     display: inline-block; width: 6px; height: 6px; border-radius: 50%;
-    background: #52525b; margin: 0 2px; animation: blink 1.2s infinite;
+    background: #999; margin: 0 2px; animation: blink 1.2s infinite;
   }
   .msg.typing .dots span:nth-child(2) { animation-delay: 0.2s; }
   .msg.typing .dots span:nth-child(3) { animation-delay: 0.4s; }
   @keyframes blink { 0%, 60%, 100% { opacity: 0.3; } 30% { opacity: 1; } }
-
-
-  .hidden { display: none; }
-
-  /* Annotation */
-  .annotation {
-    font-size: 10px; color: #3f3f46; font-style: italic;
-    margin-top: 10px; padding: 4px 6px; border-left: 2px solid #3f3f46;
-  }
-
-  .flow-arrow { text-align: center; color: #3f3f46; font-size: 16px; padding: 8px 0; }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>AI Order</h1>
-  <p class="subtitle">WhatsApp Food Ordering Bot</p>
-</div>
+<h1>AI Order - Demo Sketch</h1>
+<p class="subtitle">WhatsApp Food Ordering Bot &middot; v1 wireframe</p>
 
 <!-- Tabs -->
 <div class="tabs">
-  <div class="tab active" onclick="showTab('place')">Place Order</div>
-  <div class="tab" onclick="showTab('edit')">Edit Order</div>
+  <div class="tab active" onclick="showTab('place')">&#x1f4e6; Place Order</div>
+  <div class="tab" onclick="showTab('edit')">&#x270f;&#xfe0f; Edit Order</div>
 </div>
 
 <!-- TAB 1: Place Order -->
 <div class="container" id="tab-place">
-  <!-- Left: Menu (data display) -->
+  <!-- Left: Menu -->
   <div class="left-panel">
     <div class="panel-title">Menu Items</div>
-    <div class="data-block">
-      <div class="data-item">
-        <span class="data-name">Brown Sugar Boba</span> <span class="data-price">$4.50</span>
-        <div class="data-opt">sugar: <span class="data-vals">0% | 25% | 50% | 75% | 100%</span></div>
-        <div class="data-opt">ice: <span class="data-vals">none | less | normal</span></div>
-        <div class="data-opt">toppings +$0.50: <span class="data-vals">pearl | jelly | pudding</span></div>
-      </div>
-      <div class="data-item">
-        <span class="data-name">Teh C</span> <span class="data-price">$3.80</span>
-        <div class="data-opt">sugar: <span class="data-vals">kosong | siu dai | normal</span></div>
-        <div class="data-opt">temp: <span class="data-vals">hot | cold</span></div>
-      </div>
-      <div class="data-item">
-        <span class="data-name">Nasi Lemak</span> <span class="data-price">$5.50</span>
-        <div class="data-opt">spice: <span class="data-vals">mild | normal | extra</span></div>
-        <div class="data-opt">add-on +$0.50: <span class="data-vals">egg | otah | chicken</span></div>
-      </div>
-      <div class="data-item">
-        <span class="data-name">Kopi Gao</span> <span class="data-price">$4.00</span>
-        <div class="data-opt">sugar: <span class="data-vals">kosong | normal | gah dai</span></div>
-        <div class="data-opt">temp: <span class="data-vals">hot | cold</span></div>
+    <div class="menu-item">
+      <span class="price">$4.50</span>
+      <div class="name">Brown Sugar Boba</div>
+      <div class="options">
+        <div class="option-group">
+          <div class="option-label">Sugar</div>
+          <div class="chips"><span class="chip">0%</span><span class="chip">25%</span><span class="chip">50%</span><span class="chip">75%</span><span class="chip">100%</span></div>
+        </div>
+        <div class="option-group">
+          <div class="option-label">Ice</div>
+          <div class="chips"><span class="chip">none</span><span class="chip">less</span><span class="chip">normal</span></div>
+        </div>
+        <div class="option-group">
+          <div class="option-label">Toppings +$0.50</div>
+          <div class="chips"><span class="chip">pearl</span><span class="chip">jelly</span><span class="chip">pudding</span></div>
+        </div>
       </div>
     </div>
-
+    <div class="menu-item">
+      <span class="price">$3.80</span>
+      <div class="name">Teh C</div>
+      <div class="options">
+        <div class="option-group">
+          <div class="option-label">Sugar</div>
+          <div class="chips"><span class="chip">kosong</span><span class="chip">siu dai</span><span class="chip">normal</span></div>
+        </div>
+        <div class="option-group">
+          <div class="option-label">Temp</div>
+          <div class="chips"><span class="chip">hot</span><span class="chip">cold</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-item">
+      <span class="price">$5.50</span>
+      <div class="name">Nasi Lemak</div>
+      <div class="options">
+        <div class="option-group">
+          <div class="option-label">Spice</div>
+          <div class="chips"><span class="chip">mild</span><span class="chip">normal</span><span class="chip">extra</span></div>
+        </div>
+        <div class="option-group">
+          <div class="option-label">Add-on +$0.50</div>
+          <div class="chips"><span class="chip">egg</span><span class="chip">otah</span><span class="chip">chicken</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-item">
+      <span class="price">$4.00</span>
+      <div class="name">Kopi Gao</div>
+      <div class="options">
+        <div class="option-group">
+          <div class="option-label">Sugar</div>
+          <div class="chips"><span class="chip">kosong</span><span class="chip">normal</span><span class="chip">gah dai</span></div>
+        </div>
+        <div class="option-group">
+          <div class="option-label">Temp</div>
+          <div class="chips"><span class="chip">hot</span><span class="chip">cold</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Center: Chat -->
   <div class="chat-area">
     <div class="chat-header">Chat</div>
     <div class="messages">
-      <div class="msg bot">Hi! What would you like to order today? You can see our menu on the left.</div>
+      <div class="msg bot">
+        <div class="label">Bot</div>
+        Hi! What would you like to order today? You can see our menu on the left.
+      </div>
     </div>
     <div class="chat-input">
       <input type="text" placeholder="Type your order in natural language...">
       <button>Send</button>
     </div>
-
   </div>
 
-  <!-- Right: Order -->
+  <!-- Right: Formatted Order -->
   <div class="right-panel">
     <div class="panel-title">Order</div>
-    <div id="place-order-box" class="order-box" style="color:#52525b; text-align:center; padding:24px 12px;">
+    <div id="place-order-box" class="order-box" style="color:#888; text-align:center; padding:24px 12px; border-style: dashed;">
       Your order will appear here
     </div>
   </div>
@@ -215,31 +248,21 @@
 
 <!-- TAB 2: Edit Order -->
 <div class="container hidden" id="tab-edit">
-  <!-- Left: Menu (data display) -->
+  <!-- Left: Existing SO -->
   <div class="left-panel">
-    <div class="panel-title">Menu Items</div>
-    <div class="data-block">
-      <div class="data-item">
-        <span class="data-name">Brown Sugar Boba</span> <span class="data-price">$4.50</span>
-        <div class="data-opt">sugar: <span class="data-vals">0% | 25% | 50% | 75% | 100%</span></div>
-        <div class="data-opt">ice: <span class="data-vals">none | less | normal</span></div>
-        <div class="data-opt">toppings +$0.50: <span class="data-vals">pearl | jelly | pudding</span></div>
-      </div>
-      <div class="data-item">
-        <span class="data-name">Teh C</span> <span class="data-price">$3.80</span>
-        <div class="data-opt">sugar: <span class="data-vals">kosong | siu dai | normal</span></div>
-        <div class="data-opt">temp: <span class="data-vals">hot | cold</span></div>
-      </div>
-      <div class="data-item">
-        <span class="data-name">Nasi Lemak</span> <span class="data-price">$5.50</span>
-        <div class="data-opt">spice: <span class="data-vals">mild | normal | extra</span></div>
-        <div class="data-opt">add-on +$0.50: <span class="data-vals">egg | otah | chicken</span></div>
-      </div>
-      <div class="data-item">
-        <span class="data-name">Kopi Gao</span> <span class="data-price">$4.00</span>
-        <div class="data-opt">sugar: <span class="data-vals">kosong | normal | gah dai</span></div>
-        <div class="data-opt">temp: <span class="data-vals">hot | cold</span></div>
-      </div>
+    <div class="panel-title">Existing Order</div>
+    <div class="so-id">SO-2024-0587</div>
+    <div class="so-item">
+      <span class="qty">1x</span> Brown Sugar Boba
+      <div class="detail">50% sugar, no ice, + pearl</div>
+    </div>
+    <div class="so-item">
+      <span class="qty">1x</span> Nasi Lemak
+      <div class="detail">extra spicy, + egg</div>
+    </div>
+    <div class="so-item">
+      <span class="qty">2x</span> Teh C
+      <div class="detail">siu dai, cold</div>
     </div>
   </div>
 
@@ -247,7 +270,10 @@
   <div class="chat-area">
     <div class="chat-header">Chat</div>
     <div class="messages">
-      <div class="msg bot">Hi! I can see your order #0587. What would you like to change?</div>
+      <div class="msg bot">
+        <div class="label">Bot</div>
+        Hi! I can see your order SO-2024-0587. What would you like to change?
+      </div>
     </div>
     <div class="chat-input">
       <input type="text" placeholder="Tell me what to change...">
@@ -259,20 +285,20 @@
   <div class="right-panel">
     <div class="panel-title">Order</div>
     <div id="edit-order-box" class="order-box">
-      <div class="order-title">#0587</div>
+      <div class="order-title">SO-2024-0587</div>
       <div class="order-line"><span>1x Brown Sugar Boba</span><span>$5.00</span></div>
       <div class="order-opts">
         <div><span class="opt-key">sugar:</span> <span class="opt-val">50%</span></div>
         <div><span class="opt-key">ice:</span> <span class="opt-val">none</span></div>
         <div><span class="opt-key">topping:</span> <span class="opt-val">pearl (+$0.50)</span></div>
       </div>
-      <div style="height:4px;"></div>
+      <br>
       <div class="order-line"><span>1x Nasi Lemak</span><span>$6.00</span></div>
       <div class="order-opts">
         <div><span class="opt-key">spice:</span> <span class="opt-val">extra</span></div>
         <div><span class="opt-key">add-on:</span> <span class="opt-val">egg (+$0.50)</span></div>
       </div>
-      <div style="height:4px;"></div>
+      <br>
       <div class="order-line"><span>2x Teh C</span><span>$7.60</span></div>
       <div class="order-opts">
         <div><span class="opt-key">sugar:</span> <span class="opt-val">siu dai</span></div>
@@ -317,6 +343,7 @@ RULES:
 - If the user asks for something not on the menu, politely say it's not available.
 - For the Edit Order flow, you are modifying an existing order. Confirm what changed.
 - ACCUMULATE ORDERS: In Place Order mode, the order builds up across messages. Always include ALL current items in the "order" JSON. When the user adds items, include previous items plus new ones. When the user removes items, drop them from the list. When the user changes options, update that item.
+- COMBINE IDENTICAL ITEMS: If two or more items have the same name AND the same options, combine them into one line with increased qty. Never list the same item+options twice — use qty instead. Example: 2x Brown Sugar Boba (50%, no ice) not two separate 1x lines.
 
 OUTPUT FORMAT:
 Always respond with a JSON object. Never respond with plain text.
@@ -352,7 +379,7 @@ const conversationHistory = {
   ],
   edit: [
     { role: 'system', content: SYSTEM_PROMPT + '\n\nYou are now in Edit Order mode. The customer has existing order #0587:\n- 1x Brown Sugar Boba (sugar: 50%, ice: none, topping: pearl)\n- 1x Nasi Lemak (spice: extra, add-on: egg)\n- 2x Teh C (sugar: siu dai, temp: cold)\nTotal: $18.60\n\nHelp them modify this order.' },
-    { role: 'assistant', content: "Hi! I can see your order #0587. What would you like to change?" }
+    { role: 'assistant', content: "Hi! I can see your order SO-2024-0587. What would you like to change?" }
   ]
 };
 
@@ -412,17 +439,15 @@ async function sendMessage(container) {
   const text = input.value.trim();
   if (!text) return;
 
-  // Determine which tab we're in
   const tabKey = container.id === 'tab-place' ? 'place' : 'edit';
 
-  // Disable send while AI responds
   const sendBtn = container.querySelector('.chat-input button');
   sendBtn.disabled = true;
 
   // Add user message
   const userMsg = document.createElement('div');
   userMsg.className = 'msg user';
-  userMsg.textContent = text;
+  userMsg.innerHTML = '<div class="label">You</div>' + text;
   messages.appendChild(userMsg);
   input.value = '';
   messages.scrollTop = messages.scrollHeight;
@@ -445,13 +470,11 @@ async function sendMessage(container) {
       const parsed = JSON.parse(reply);
       chatText = parsed.message || reply;
       order = parsed.order || null;
-    } catch (e) {
-      // If JSON parse fails, use raw reply as chat text
-    }
+    } catch (e) {}
 
     const botMsg = document.createElement('div');
     botMsg.className = 'msg bot';
-    botMsg.innerHTML = chatText.replace(/\n/g, '<br>');
+    botMsg.innerHTML = '<div class="label">Bot</div>' + chatText.replace(/\n/g, '<br>');
     messages.appendChild(botMsg);
 
     if (order) {
@@ -462,36 +485,33 @@ async function sendMessage(container) {
     typing.remove();
     const errMsg = document.createElement('div');
     errMsg.className = 'msg bot';
-    errMsg.textContent = 'Sorry, something went wrong. ' + err.message;
+    errMsg.innerHTML = '<div class="label">Bot</div>Sorry, something went wrong. ' + err.message;
     messages.appendChild(errMsg);
   }
-  // Re-enable send
   sendBtn.disabled = false;
   messages.scrollTop = messages.scrollHeight;
 }
 
 function renderOrder(box, order, tabKey) {
-  // If no items (or all removed in place mode), show placeholder
   const hasItems = tabKey === 'place'
     ? order.items.some(i => !i.removed)
     : order.items.length > 0;
 
   if (!hasItems) {
-    box.innerHTML = tabKey === 'place' ? 'Your order will appear here' : 'Your edited order will appear here';
-    box.style.cssText = 'color:#52525b; text-align:center; padding:24px 12px;';
+    box.innerHTML = 'Your order will appear here';
+    box.style.cssText = 'color:#888; text-align:center; padding:24px 12px; border-style: dashed;';
     const btn = box.parentElement.querySelector('.order-status');
     if (btn) btn.remove();
     return;
   }
 
-  const orderNum = tabKey === 'edit' ? '#0587 (edited)' : '#' + String(Math.floor(1000 + Math.random() * 9000));
+  const orderNum = tabKey === 'edit' ? 'SO-2024-0587 (edited)' : 'Order #' + String(Math.floor(1000 + Math.random() * 9000));
   let html = `<div class="order-title">${orderNum}</div>`;
 
-  // In place mode, skip removed items entirely. In edit mode, show with strikethrough.
   const visibleItems = tabKey === 'place' ? order.items.filter(i => !i.removed) : order.items;
 
   visibleItems.forEach((item, idx) => {
-    const strikeStyle = item.removed ? ' style="text-decoration: line-through; color: #52525b;"' : '';
+    const strikeStyle = item.removed ? ' style="text-decoration: line-through; color: #999;"' : '';
     html += `<div class="order-line"${strikeStyle}><span>${item.qty}x ${item.name}</span><span>$${item.price.toFixed(2)}</span></div>`;
 
     if (item.options && !item.removed) {
@@ -501,10 +521,9 @@ function renderOrder(box, order, tabKey) {
       }
       html += '</div>';
     }
-    if (idx < visibleItems.length - 1) html += '<div style="height:4px;"></div>';
+    if (idx < visibleItems.length - 1) html += '<br>';
   });
 
-  // Compute total from items (don't trust GPT math)
   const computedTotal = order.items
     .filter(i => !i.removed)
     .reduce((sum, i) => sum + i.price, 0);
@@ -512,12 +531,12 @@ function renderOrder(box, order, tabKey) {
   box.innerHTML = html;
   box.style = '';
 
-  // Add submit button after the order box if not already there
+  // Add submit button
   let submitBtn = box.parentElement.querySelector('.order-status');
   if (!submitBtn) {
     submitBtn = document.createElement('button');
     submitBtn.className = 'order-status';
-    submitBtn.textContent = 'Submit';
+    submitBtn.textContent = tabKey === 'edit' ? 'Edit Order' : 'Create Order';
     box.parentElement.appendChild(submitBtn);
     submitBtn.addEventListener('click', () => {
       const label = submitBtn.textContent;
@@ -538,20 +557,6 @@ document.querySelectorAll('.chat-input button').forEach(btn => {
 document.querySelectorAll('.chat-input input').forEach(input => {
   input.addEventListener('keydown', e => {
     if (e.key === 'Enter') sendMessage(input.closest('.container'));
-  });
-});
-
-// Order buttons
-document.querySelectorAll('.order-status').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const label = btn.textContent;
-    btn.classList.add('clicked');
-    btn.textContent = 'Sent!';
-    showToast('Order submitted successfully');
-    setTimeout(() => {
-      btn.classList.remove('clicked');
-      btn.textContent = label;
-    }, 2000);
   });
 });
 </script>
